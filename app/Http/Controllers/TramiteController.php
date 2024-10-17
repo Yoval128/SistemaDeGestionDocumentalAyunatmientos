@@ -7,7 +7,10 @@ use App\Models\Tramite;
 
 class TramiteController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth'); 
+    }
     public function tramite_index()
     {
         return view('tramite.tramite_index')->with(['tramite' => Tramite::all()]);

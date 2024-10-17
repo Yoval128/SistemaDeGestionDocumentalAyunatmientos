@@ -17,13 +17,23 @@ class UsuarioController extends Controller
 
     public function login_post(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        if (Usuario::attempt($credentials)) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $user = Usuario::where('email', $request->input('email'))->first();
+    
+        if ($user && password_verify($request->input('password'), $user->password)) {
+            Auth::login($user);
             return redirect()->route('usuario_index');
         }
-        return redirect()->route('login')->with('error', 'Credenciales incorrectas.');
+    
+        return redirect()->route('usuario_index')->with('success', 'Usuario creado con éxito.');
     }
+    
+    
+
 
     public function logout()
     {
@@ -112,7 +122,7 @@ class UsuarioController extends Controller
             $img2 = $ldate . $img;
             \Storage::disk('local')->put($img2, \File::get($file));
         } else {
-            $img2 = $usuario->foto; 
+            $img2 = $usuario->foto;
         }
 
         $id->update([
@@ -129,7 +139,7 @@ class UsuarioController extends Controller
 
         if ($request->filled('password')) {
             $id->password = bcrypt($request->input('password'));
-            $id->save(); 
+            $id->save();
         }
 
         return redirect()->route('usuario_index')->with('success', 'Usuario actualizado con éxito.');

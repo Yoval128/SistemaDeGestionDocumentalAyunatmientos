@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable; // Cambia esto
+use Illuminate\Notifications\Notifiable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable // Cambia 'Model' a 'Authenticatable'
 {
-    use HasFactory;
+    use HasFactory, Notifiable; // Asegúrate de incluir Notifiable si necesitas notificaciones
+
     protected $table = 'tb_usuarios';
     protected $primaryKey = 'id_usuario';
     protected $fillable = [
@@ -21,5 +23,11 @@ class Usuario extends Model
         'rol',
         'foto',
         'activo',
+    ];
+
+    // Si necesitas configurar la contraseña como oculto
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 }
