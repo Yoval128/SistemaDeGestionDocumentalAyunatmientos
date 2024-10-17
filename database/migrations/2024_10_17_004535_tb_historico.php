@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('valor_historico'); /* -- Descripción del valor histórico del documento */
             $table->boolean('acceso_publico'); /*   -- Indica si el documento es de acceso público */
             $table->text('restricciones_acceso'); /*  -- Restricciones en el acceso (si aplica) */
+            $table->text('documentos_adjuntos'); 
             $table->timestamps();
         });
     }

@@ -44,23 +44,21 @@
                 <li class="list-group-item"><a href="{{ route('tramite_index') }}">Mostrar Trámites</a></li>
                 <li class="list-group-item"><a href="{{ route('tramite_alta') }}">Crear Trámite</a></li>
 
-                {{--   <li class="list-group-item"><strong>Concentración</strong></li>
+                <li class="list-group-item"><strong>Concentración</strong></li>
                 <li class="list-group-item"><a href="{{ route('concentracion_index') }}">Mostrar Concentración</a></li>
                 <li class="list-group-item"><a href="{{ route('concentracion_alta') }}">Crear Concentración</a></li>
-                </li> --}}
+                </li>
 
-                {{-- <li class="list-group-item"><strong>Histórico</strong></li>
+                <li class="list-group-item"><strong>Histórico</strong></li>
                 <li class="list-group-item"><a href="{{ route('historico_index') }}">Mostrar Histórico</a></li>
                 <li class="list-group-item"><a href="{{ route('historico_alta') }}">Agregar Documento Histórico</a>
-                </li> --}}
+                </li>
 
                 {{-- <li class="list-group-item"><strong>Monitoreo IoT</strong></li>
                 <li class="list-group-item"><a href="{{ route('iot_index') }}">Mostrar Monitoreo</a></li>
                 <li class="list-group-item"><a href="{{ route('iot_detalle') }}">Detalles Monitoreo</a></li>
  --}}
-                {{-- <li class="list-group-item"><strong>Autenticación</strong></li>
-                <li class="list-group-item"><a href="{{ route('auth.login') }}">Iniciar Sesión</a></li>
-            --}}
+                
             </ul>
         </div>
 

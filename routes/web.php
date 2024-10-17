@@ -20,9 +20,9 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 Route::name('login')->get('/login', [UsuarioController::class, 'login']);
 Route::name('login_post')->post('/login_post', [UsuarioController::class, 'login_post']);

@@ -17,5 +17,6 @@ class Historico extends Model
         'valor_historico',
         'acceso_publico',
         'restricciones_acceso',
+        'documentos_adjuntos',
     ];
 }

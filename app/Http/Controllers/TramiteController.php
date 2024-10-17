@@ -7,10 +7,10 @@ use App\Models\Tramite;
 
 class TramiteController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth'); 
-    }
+   /*      public function __construct()
+        {
+            $this->middleware('auth'); 
+        } */
     public function tramite_index()
     {
         return view('tramite.tramite_index')->with(['tramite' => Tramite::all()]);
@@ -85,15 +85,16 @@ class TramiteController extends Controller
             'activo' => 'nullable|boolean',
         ]);
 
-        if ($request->file('foto')) {
-            $file = $request->file('foto');
-            $img = $file->getClientOriginalName();
-            $ldate = date('Ymd_His_');
-            $img2 = $ldate . $img;
-            \Storage::disk('local')->put($img2, \File::get($file));
-        } else {
-            $img2 = $tramite->foto;
+        $documentos = json_decode($historico->documentos_adjuntos, true) ?: [];
+
+        if ($request->file('documentos_adjuntos')) {
+            foreach ($request->file('documentos_adjuntos') as $file) {
+                $pdfName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('pdfs'), $pdfName);
+                $documentos[] = $pdfName; 
+            }
         }
+
 
         $id->update([
             'nombre' => $request->input('nombre'),
@@ -103,7 +104,6 @@ class TramiteController extends Controller
             'fecha_nacimiento' => $request->input('fecha_nacimiento'),
             'email' => $request->input('email'),
             'rol' => $request->input('rol'),
-            'foto' => $img2,
             'activo' => $request->input('activo') ? 1 : 0,
         ]);
 
