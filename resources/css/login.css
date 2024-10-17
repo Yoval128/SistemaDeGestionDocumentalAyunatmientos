@@ -1,0 +1,75 @@
+/* Fondo del cuerpo */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Estilo para el contenedor del formulario */
+.card {
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Título del formulario */
+.card-title {
+  color: #f8d342; 
+}
+
+/* Etiquetas del formulario */
+.form-label {
+    color: #f8d342; 
+}
+
+/* Botón de inicio de sesión */
+.btn-warning {
+    background-color: #f8d342;
+    border: none;
+    color: #000000;
+}
+
+/* Imagen del logo */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    background-color: #1c1c1c; /* Fondo negro elegante */
+    color: #fff; /* Texto blanco */
+}
+
+.container {
+    margin-top: 100px;
+}
+
+.card {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background-color: #f8d342; /* Botón dorado */
+    border-color: #f8d342;
+}
+
+.btn-primary:hover {
+    background-color: #e0bb35; /* Botón dorado oscuro */
+    border-color: #e0bb35;
+}
+
+.btn-secondary {
+    background-color: #343a40; /* Botón gris oscuro */
+    border-color: #343a40;
+}
+
+h3 {
+   color: #f8d342; 
+}
+
+label {
+    color: #000; /* Texto negro para etiquetas */
+}
