@@ -1,0 +1,189 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif; /* Fuente más legible */
+    background-color: #f8f9fa; /* Color de fondo suave */
+}
+
+.sidebar {
+    min-width: 250px;
+    background: #fff; /* Fondo blanco para la barra lateral */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.header,
+.title-box,
+.description-box,
+.alerts-section {
+    margin-bottom: 20px;
+}
+
+.header {
+    background: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.title-box h1 {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Espaciado uniforme */
+}
+
+.menu-box {
+    width: 23%;
+    margin: 1%;
+    padding: 15px; /* Mayor espacio interno */
+    border: 1px solid #ccc; /* Borde suave */
+    border-radius: 8px; /* Bordes más suaves */
+    text-align: center;
+    background-color: #fff; /* Fondo blanco */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animación suave */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.menu-box:hover {
+    background: #f0f0f0; /* Color al pasar el mouse */
+    transform: translateY(-3px); /* Efecto de elevación */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+}
+
+.menu-icon img {
+    max-width: 50px; /* Tamaño máximo de icono */
+    margin-bottom: 10px; /* Espaciado debajo del icono */
+}
+
+.menu-title h2 {
+    font-size: 18px; /* Tamaño de título más grande */
+    margin: 5px 0; /* Margen para el título */
+}
+
+.menu-description p {
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    color: #666; /* Color de texto más suave */
+}
+
+/* Estilos para enlaces */
+.menu-box a {
+    text-decoration: none; /* Quitar subrayado de los enlaces */
+    color: #000; /* Color del enlace en negro */
+}
+
+.menu-box a:hover {
+    color: #007bff; /* Color azul al pasar el ratón */
+    font-weight: bold; /* Negrita al pasar el ratón */
+}
+
+.alerts-section {
+    background: #eaeaea; /* Fondo gris suave */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.alerts-section h2 {
+    margin: 0 0 10px; /* Margen para el título de alertas */
+}
+
+.alerts-section ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin relleno */
+}
+
+.alerts-section li {
+    padding: 5px 0; /* Espaciado entre elementos de lista */
+    border-bottom: 1px solid #ccc; /* Línea suave entre alertas */
+}
+
+.alerts-section li:last-child {
+    border-bottom: none; /* Sin línea en el último elemento */
+}
+
+/* Header de dashboard */
+
+.header-home {
+    display: flex; /* Usar flexbox para alinear elementos */
+    justify-content: space-between; /* Espaciado entre el texto y el botón */
+    align-items: center; /* Centrar verticalmente */
+    padding: 15px 20px; /* Espaciado interno */
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin-bottom: 20px; /* Espacio abajo */
+}
+
+.greeting-box {
+    display: flex; /* Usar flexbox para el texto */
+    align-items: center; /* Centrar verticalmente */
+}
+
+.greeting-box h3 {
+    font-size: 24px; /* Tamaño de fuente grande */
+    margin: 0; /* Sin margen */
+}
+
+.greeting-actions {
+    margin-left: 20px; /* Espacio entre el texto y el botón */
+}
+
+.greeting-actions button {
+    background-color: #007bff; /* Color del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente del botón */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.greeting-actions button:hover {
+    background-color: #0056b3; /* Color del botón al pasar por encima */
+}
+
+/* Línea dorada */
+.header-home::after {
+    content: ""; /* Necesario para crear una línea */
+    display: block; /* Hace que la línea sea un bloque */
+    height: 3px; /* Altura de la línea */
+    background-color: gold; /* Color dorado */
+    margin-top: 10px; /* Espacio arriba de la línea */
+}
+
+/* CSS del las ligas d edetalle */
+
+.documentos-list {
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0; /* Quita el padding */
+}
+
+.documentos-list li {
+    margin: 5px 0; /* Espacio entre elementos */
+}
+
+.documentos-list a {
+    text-decoration: none; /* Quita el subrayado */
+    color: #007bff; /* Color del texto */
+    padding: 5px 10px; /* Espaciado interno */
+    border: 1px solid #007bff; /* Bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.documentos-list a:hover {
+    background-color: #007bff; /* Color al pasar el ratón */
+    color: white; /* Cambiar color de texto al pasar el ratón */
+}

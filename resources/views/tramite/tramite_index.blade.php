@@ -26,12 +26,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($tramite as $key => $tramites)
+                                @foreach ($datos as $key => $tramites)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $tramites->id_tramite }}</td>
-                                        <td>{{ $tramites->id_area }}</td> 
-                                        <td>{{ $tramites->id_usuario }}</td> 
+                                        <td>{{ $tramites->area_id }}</td>
+                                        <td>{{ $tramites->usuario_nombre }} {{ $tramites->usuario_apellidoP }} {{ $tramites->usuario_apellidoM }}</td>
                                         <td>{{ $tramites->fecha_inicio }}</td>
                                         <td>{{ $tramites->fecha_limite }}</td>
                                         <td>{{ $tramites->estado }}</td>

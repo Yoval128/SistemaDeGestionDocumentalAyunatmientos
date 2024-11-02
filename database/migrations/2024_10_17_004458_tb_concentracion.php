@@ -24,8 +24,8 @@ return new class extends Migration
             $table->date('ano_creacion');
             $table->date('ano_cierre');
             $table->string('motivo_cierre');
-            $table->string('legajos');
-            $table->string('medida');
+            $table->integer('legajos'); // Cambiar a entero
+            $table->float('medida');    // Cambiar a flotante
             $table->string('ubicacion_fisica');
             $table->text('archivo_pdf');
             $table->boolean('digitalizado');

@@ -7,18 +7,60 @@
     <div class="card">
         <form action="{{ route('historico_registrar') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="form-group">
-                <label for="id_usuario_asigando">Usuario Asignado:</label>
-                <input type="text" class="form-control" id="id_usuario_asigando" name="id_usuario_asigando" required>
+                <label for="id_usuario_asigando">Usuario asignado:</label>
+                <select class="form-select" id="id_usuario_asigando" name="id_usuario_asigando" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    @foreach ($usuarios as $usuario)
+                        <option value="{{ $usuario->id_usuario }}">{{ $usuario->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
+
             <div class="form-group">
-                <label for="id_tramite">ID del Trámite:</label>
-                <input type="text" class="form-control" id="id_tramite" name="id_tramite" required>
+                <label for="id_tramite">Trámite:</label>
+                <select class="form-select" id="id_tramite" name="id_tramite" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    @foreach ($tramites as $tramite)
+                        <option value="{{ $tramite->id_tramite }}">{{ $tramite->observaciones }}</option>
+                    @endforeach
+                </select>
             </div>
+
+            
             <div class="form-group">
                 <label for="tipo_documento">Tipo de Documento:</label>
-                <input type="text" class="form-control" id="tipo_documento" name="tipo_documento" required>
+                <select class="form-control" id="tipo_documento" name="tipo_documento" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="Actas">Actas</option>
+                    <option value="Resoluciones">Resoluciones</option>
+                    <option value="Decretos">Decretos</option>
+                    <option value="Informes">Informes</option>
+                    <option value="Contratos y Convenios">Contratos y Convenios</option>
+                    <option value="Correspondencia Oficial">Correspondencia Oficial</option>
+                    <option value="Memorandos">Memorandos</option>
+                    <option value="Planos y Mapas">Planos y Mapas</option>
+                    <option value="Reglamentos y Normativas">Reglamentos y Normativas</option>
+                    <option value="Proyectos y Propuestas">Proyectos y Propuestas</option>
+                    <option value="Documentos Legales">Documentos Legales</option>
+                    <option value="Cédulas y Certificados">Cédulas y Certificados</option>
+                    <option value="Actas de Propiedad o Escrituras">Actas de Propiedad o Escrituras</option>
+                    <option value="Testimonios y Transcripciones">Testimonios y Transcripciones</option>
+                    <option value="Publicaciones Oficiales">Publicaciones Oficiales</option>
+                </select>
             </div>
+
             <div class="form-group">
                 <label for="valor_historico">Valor Histórico:</label>
                 <textarea class="form-control" id="valor_historico" name="valor_historico" required></textarea>

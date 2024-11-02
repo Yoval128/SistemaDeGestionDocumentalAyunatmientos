@@ -47,10 +47,22 @@
                 </div>
             </div>
 
+
             <div class="row mb-3">
                 <div class="col-md-12">
-                    <strong>Notas Adicionales:</strong>
-                    <p>{{ $concentracion->notas ?? 'No hay notas adicionales.' }}</p>
+                    <strong>Documentos Adjuntos:</strong>
+                    <div class="documentos-container">
+                        @if ($concentracion->archivo_pdf)
+                            @foreach (json_decode($concentracion->archivo_pdf) as $documento)
+                                <a href="{{ url('pdfs/' . $documento) }}" target="_blank"
+                                    class="btn btn-primary btn-sm documento-btn">
+                                    {{ $documento }}
+                                </a>
+                            @endforeach
+                        @else
+                            <p>No hay documentos adjuntos.</p>
+                        @endif
+                    </div>
                 </div>
             </div>
 

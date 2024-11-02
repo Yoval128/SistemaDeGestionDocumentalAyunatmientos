@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Concentracion extends Model
 {
     use HasFactory;
+
     protected $table = 'tb_concentracion';
     protected $primaryKey = 'id_concentracion';
+
     protected $fillable = [
-        'calve',
+        'clave',
         'nombre_expediente',
         'fondo',
         'seccion',
@@ -23,8 +25,8 @@ class Concentracion extends Model
         'motivo_cierre',
         'legajos',
         'medida',
-        'descripccion',
         'ubicacion_fisica',
-        'digitalizacion',
+        'archivo_pdf',       
+        'digitalizado',
     ];
 }

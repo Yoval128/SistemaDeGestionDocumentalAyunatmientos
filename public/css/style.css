@@ -1,0 +1,28 @@
+.header, .title-box, .description-box, .alerts-section {
+    margin-bottom: 20px;
+}
+
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu-box {
+    width: 23%; /* Cambia el tamaño según sea necesario */
+    margin: 1%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.menu-box:hover {
+    background: #f0f0f0;
+}
+
+.alerts-section {
+    background: #ffeb3b;
+    padding: 15px;
+    border-radius: 5px;
+}

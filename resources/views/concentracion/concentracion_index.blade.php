@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Lista de Concentraciones</h3>
 
-                        <a href="{{ route('concentracion_registrar') }}">
+                        <a href="{{ route('concentracion_alta') }}">
                             <button type="button" class="btn btn-warning mb-3">Nueva Concentración</button>
                         </a>
 
@@ -18,12 +18,10 @@
                                     <th>#</th>
                                     <th>ID</th>
                                     <th>Clave</th>
-                                    <th>Nombre Expediente</th>
+                                    <th>Nombre <br> Expediente</th>
                                     <th>Fondo</th>
                                     <th>Sección</th>
-                                    <th>Subsección</th>
-                                    <th>Año de Creación</th>
-                                    <th>Año de Cierre</th>
+                                    <th>Año</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -32,15 +30,14 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $concentracion->id_concentracion }}</td>
-                                        <td>{{ $concentracion->calve }}</td>
+                                        <td>{{ $concentracion->clave }}</td>
                                         <td>{{ $concentracion->nombre_expediente }}</td>
                                         <td>{{ $concentracion->fondo }}</td>
                                         <td>{{ $concentracion->seccion }}</td>
-                                        <td>{{ $concentracion->subseccion }}</td>
-                                        <td>{{ $concentracion->ano_creacion }}</td>
-                                        <td>{{ $concentracion->ano_cierre }}</td>
+                                        <td>{{ $concentracion->ano_creacion }} hasta {{ $concentracion->ano_cierre }}</td>
+
                                         <td>
-                                            <a href="{{ route('concentracion_editar', ['id' => $concentracion->id_concentracion]) }}">
+                                            <a href="{{ route('concentracion_modificar', ['id' => $concentracion->id_concentracion]) }}">
                                                 <button type="button" class="btn btn-warning btn-sm">Editar</button>
                                             </a>
                                             <form action="{{ route('concentracion_eliminar', ['id' => $concentracion->id_concentracion]) }}" method="POST" style="display:inline;">

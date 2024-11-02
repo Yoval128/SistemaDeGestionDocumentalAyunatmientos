@@ -11,10 +11,20 @@
                 <label for="id_area">Área:</label>
                 <input type="text" class="form-control" id="id_area" name="id_area" required>
             </div>
+
             <div class="form-group">
                 <label for="id_usuario">Usuario:</label>
-                <input type="text" class="form-control" id="id_usuario" name="id_usuario" required>
+                <select class="form-select" id="id_usuario" name="id_usuario">
+                    <option selected>Selecciona una opción...</option>
+                    @foreach ($usuarios as $usuario)
+                        <option value="{{ $usuario->id_usuario }}">
+                            {{ $usuario->nombre }} {{ $usuario->apellidoP }} {{ $usuario->apellidoM }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+            
+
             <div class="form-group">
                 <label for="fecha_inicio">Fecha de Inicio:</label>
                 <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
-
     public function login()
     {
         return view('auth.login');
@@ -21,23 +20,43 @@ class UsuarioController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-    
-        $user = Usuario::where('email', $request->input('email'))->first();
-    
-        if ($user && password_verify($request->input('password'), $user->password)) {
-            Auth::login($user);
-            return redirect()->route('usuario_index');
-        }
-    
-        return redirect()->route('usuario_index')->with('success', 'Usuario creado con éxito.');
-    }
-    
-    
 
+        // Usar Auth::attempt para la autenticación
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->route('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'Las credenciales proporcionadas son incorrectas.',
+        ]);
+    }
+
+
+    public function testLogin(Request $request)
+    {
+        // Cambia estos valores según sea necesario
+        $email = 'admin@hotmail.com'; // Email del usuario
+        $password = '12345'; // Reemplaza con la contraseña real
+
+        $user = Usuario::where('email', $email)->first();
+
+        if ($user && password_verify($password, $user->password)) {
+            return "¡Login exitoso!";
+        } else {
+            return "Credenciales incorrectas.";
+        }
+    }
+
+
+    public function dashboard()
+    {
+        $user = Auth::user(); // Obtener el usuario autenticado
+        return view('dashboard', ['user' => $user]); // Pasar el usuario a la vista
+    }
 
     public function logout()
     {
-        Usuario::logout();
+        Auth::logout(); // Cierra la sesión del usuario
         return redirect()->route('login')->with('success', 'Has cerrado sesión.');
     }
 
@@ -122,7 +141,7 @@ class UsuarioController extends Controller
             $img2 = $ldate . $img;
             \Storage::disk('local')->put($img2, \File::get($file));
         } else {
-            $img2 = $usuario->foto;
+            $img2 = $id->foto;
         }
 
         $id->update([

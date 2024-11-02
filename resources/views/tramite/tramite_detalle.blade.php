@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-4">
                     <strong>Usuario:</strong>
-                    <p>{{ $tramite->id_usuario }}</p> <!-- Considera mostrar el nombre del usuario si tienes la relación -->
+                    <p>{{ $usuario->nombre }} {{ $usuario->apellidoP }} {{ $usuario->apellidoM }}</p> <!-- Nombre del usuario -->
                 </div>
             </div>
 
@@ -46,20 +46,20 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <strong>Documentos Adjuntos:</strong>
-                    <ul>
+                    <div class="documentos-container">
                         @if ($tramite->documentos_adjuntos)
                             @foreach (json_decode($tramite->documentos_adjuntos) as $documento)
-                                <li>
-                                    <a href="{{ url('pdfs/' . $documento) }}" target="_blank">{{ $documento }}</a>
-                                </li>
+                                <a href="{{ url('pdfs/' . $documento) }}" target="_blank" class="btn btn-primary btn-sm documento-btn">
+                                    {{ $documento }}
+                                </a>
                             @endforeach
                         @else
-                            <li>No hay documentos adjuntos.</li>
+                            <p>No hay documentos adjuntos.</p>
                         @endif
-                    </ul>
+                    </div>
                 </div>
             </div>
-
+            
             <a href="{{ route('tramite_index') }}" class="btn btn-secondary">Regresar</a>
         </div>
     </div>

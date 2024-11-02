@@ -18,13 +18,18 @@
             <div class="col-md-6">
                 <div class="card">
                     <h3 class="card-title text-center">Iniciar Sesión</h3>
-                    @if (session('error'))
+
+                    @if ($errors->any())
                         <div class="alert alert-danger">
-                            {{ session('error') }}
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
-                    <form action="{{ route('login_post') }}" method="post">
 
+                    <form action="{{ route('login_post') }}" method="post">
                         {{ csrf_field() }}
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo Electrónico</label>
@@ -34,21 +39,13 @@
                             <label for="password" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                                <label class="form-check-label" for="remember">Recordar mi contraseña</label>
-                            </div>
-                        </div>
                         <button type="submit" class="btn btn-warning">Iniciar Sesión</button>
                     </form>
-                    <div class="mt-3">
-                        <a href="#">¿Olvidaste tu contraseña?</a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
