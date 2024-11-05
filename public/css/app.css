@@ -5,12 +5,66 @@ body {
     font-family: Arial, sans-serif; /* Fuente más legible */
     background-color: #f8f9fa; /* Color de fondo suave */
 }
-
+/* Barra lateral */
 .sidebar {
-    min-width: 250px;
-    background: #fff; /* Fondo blanco para la barra lateral */
+    width: 260px; /* Ancho más cómodo */
+    background: #343a40; /* Color oscuro de fondo */
+    color: #fff; /* Texto blanco */
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.sidebar h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Listado de elementos del menú */
+.sidebar ul {
+    list-style: none; /* Quitar los puntos de lista */
+    padding-left: 0;
+}
+
+.sidebar .list-group-item {
+    border: none; /* Sin bordes */
+    background: transparent; /* Fondo transparente */
+    padding: 12px 15px;
+    color: #ddd; /* Texto gris claro */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+}
+
+.sidebar .list-group-item:hover {
+    background-color: #495057; /* Color de hover suave */
+    padding-left: 20px; /* Desplazar ligeramente */
+    color: #fff; /* Cambiar texto a blanco */
+}
+
+.sidebar .list-group-item.active {
+    background-color: #007bff; /* Color azul para el ítem activo */
+    color: #fff; /* Texto blanco */
+}
+
+.sidebar .list-group-item a {
+    color: inherit; /* Heredar color del texto */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .list-group-item a:hover {
+    text-decoration: underline; /* Subrayado al hacer hover */
+}
+
+.sidebar .list-group-item i {
+    margin-right: 10px;
+    font-size: 18px; /* Tamaño de los íconos */
 }
 
 .main-content {
