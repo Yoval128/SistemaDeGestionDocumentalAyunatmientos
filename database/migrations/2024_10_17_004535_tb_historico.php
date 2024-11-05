@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tb_historico', function (Blueprint $table) {
             $table->bigIncrements('id_historico'); /* -- Foránea que enlaza con el trámite del que proviene (si aplica) */
-            $table->bigInteger('id_usuario_asigando'); 
-            $table->bigInteger('id_tramite'); /* -- Tipo de documento (acta, resolución, etc.) */
+            $table->integer('id_usuario_asigando'); 
+            $table->integer('id_tramite'); /* -- Tipo de documento (acta, resolución, etc.) */
             $table->string('tipo_documento'); /* -- Fecha en que fue creado el documento */
             $table->text('valor_historico'); /* -- Descripción del valor histórico del documento */
             $table->boolean('acceso_publico'); /*   -- Indica si el documento es de acceso público */

@@ -5,95 +5,74 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\Area;
 use App\Models\Usuario;
 
 class AreaController extends Controller
 {
-
-    public function login()
+    public function areas_index()
     {
-        return view('auth.login');
+        return view('area.areas_index')->with(['areas' => Area::all()]);
+    }
+    public function areas_alta()
+    {
+        return view('area.areas_alta');
     }
 
-    public function login_post()
-    {
-       
-    }
-
-    public function usuario_index()
-    {
-        return view('usuario.index')->with(['alumno' => Usuario::all()]);
-    }
-    public function alumno_alta()
-    {
-        return view('alumno_alta');
-    }
-
-    public function alumno_registrar(Request $request)
+    public function areas_registrar(Request $request)
     {
         $this->validate($request, [
             'nombre' => 'required',
-            'fn' => 'required'
+            'descripccion' => 'required',
+            'activo' => 'nullable|boolean',
         ]);
-        if ($request->file('foto') != '') {
-            $file = $request->file('foto');
-            $img = $file->getClientOriginalName();
-            $ldate = date('Ymd_His_');
-            $img2 = $ldate . $img;
-            \Storage::disk('local')->put($img2, \File::get($file));
-        } else {
-            $img2 = "logo_utvt_.png";
-        }
 
-        Usuario::create(array(
+
+        Area::create([
             'nombre' => $request->input('nombre'),
-            'fn' => $request->input('fn'),
-            'foto' => $img2
-        ));
-        return redirect()->route('alumno');
+            'descripccion' => $request->input('descripccion'),
+            'activo' => $request->input('activo') ? 1 : 0,
+        ]);
+
+        return redirect()->route('areas_index')->with('success', 'Area creado con éxito.');
     }
 
 
-    public function alumno_borrar(Usuario $id)
+    public function areas_eliminar(Area $id)
     {
         $id->delete();
-        return redirect()->route('alumno');
+        return redirect()->route('areas_index');
     }
 
-    public function alumno_editar(Usuario $id)
+    public function areas_modificar(Area $id)
     {
-        return view('alumno_editar')->with('alumno', $id);
+        return view('area.areas_modificacion')->with('areas', $id);
     }
 
-    public function alumno_actualizar(Request $request, Usuario $id)
+
+    public function areas_actualizar(Request $request, Area $id)
     {
+
         $this->validate($request, [
             'nombre' => 'required',
-            'fn' => 'required'
+            'descripccion' => 'required',
+            'activo' => 'nullable|boolean',
         ]);
 
-        if ($request->file('foto') != '') {
-            $file = $request->file('foto');
-            $img = $file->getClientOriginalName();
-            $ldate = date('Ymd_His_');
-            $img2 = $ldate . $img;
-            \Storage::disk('local')->put($img2, \File::get($file));
-        } else {
-            $img2 = $id->foto;
-        }
+
 
         $id->update([
             'nombre' => $request->input('nombre'),
-            'fn' => $request->input('fn'),
-            'foto' => $img2
+            'descripccion' => $request->input('descripccion'),
+            'activo' => $request->input('activo') ? 1 : 0,
         ]);
 
-        return redirect()->route('alumno');
+        return redirect()->route('areas_index')->with('success', 'Area actualizado con éxito.');
     }
 
-    public function alumno_detalle($id)
+    public function areas_detalle($id)
     {
-        $query = Usuario::find($id);
-        return view('alumno_detalle')->with(['alumno' => $query]);
+        $query = Area::find($id);
+        return view('area.areas_detalle')->with(['areas' => $query]);
     }
 }

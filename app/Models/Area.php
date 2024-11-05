@@ -13,5 +13,11 @@ class Area extends Model
     protected $fillable = [
         'nombre',
         'descripccion',
+        'activo'
     ];
+
+    public function usuarioAreaRols()
+    {
+        return $this->hasMany(UsuarioAreaRol::class, 'id_area');
+    }
 }

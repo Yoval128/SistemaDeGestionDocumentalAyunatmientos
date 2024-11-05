@@ -23,10 +23,14 @@
                 <select class="form-select" id="id_usuario_asigando" name="id_usuario_asigando" required>
                     <option value="" disabled selected>Selecciona una opción...</option>
                     @foreach ($usuarios as $usuario)
-                        <option value="{{ $usuario->id_usuario }}">{{ $usuario->nombre }}</option>
+
+                        <option value="{{ $usuario->id_usuario }}">
+                            {{ $usuario->nombre }} {{ $usuario->apellidoP }} {{ $usuario->apellidoM }}
+                        </option>
                     @endforeach
                 </select>
             </div>
+            
 
             <div class="form-group">
                 <label for="id_tramite">Trámite:</label>

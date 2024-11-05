@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Nuevo Registro de Rol</h3>
+    <h3>Nuevo Registro de Área</h3>
     <hr>
 
     <div class="card">
-        <form action="{{ route('rol_registrar') }}" method="post">
+        <form action="{{ route('areas_registrar') }}" method="post">
             @csrf 
 
             @if ($errors->any())
@@ -19,7 +19,7 @@
             @endif
 
             <div class="form-group">
-                <label for="nombre">Nombre del Rol:</label>
+                <label for="nombre">Nombre del Área:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
             </div>
 
@@ -29,7 +29,7 @@
             </div>
 
             <div class="form-group">
-                <label for="activo">¿Está activo?</label>
+                <label for="activo">¿Está activa?</label>
                 <select class="form-control" id="activo" name="activo" required>
                     <option value="" disabled selected>Selecciona una opción...</option>
                     <option value="1" {{ old('activo') == '1' ? 'selected' : '' }}>Sí</option>
@@ -38,7 +38,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
-            <a href="{{ route('rol_index') }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ route('areas_index') }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 @endsection

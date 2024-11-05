@@ -7,11 +7,18 @@
     <div class="card">
         <form action="{{ route('tramite_registrar') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+
             <div class="form-group">
                 <label for="id_area">Área:</label>
-                <input type="text" class="form-control" id="id_area" name="id_area" required>
+                <select class="form-select" id="id_area" name="id_area">
+                    <option selected>Selecciona una opción...</option>
+                    @foreach ($areas as $area)
+                        <option value="{{ $area->id_area }}">
+                            {{ $area->nombre }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-
             <div class="form-group">
                 <label for="id_usuario">Usuario:</label>
                 <select class="form-select" id="id_usuario" name="id_usuario">
@@ -23,7 +30,7 @@
                     @endforeach
                 </select>
             </div>
-            
+
 
             <div class="form-group">
                 <label for="fecha_inicio">Fecha de Inicio:</label>

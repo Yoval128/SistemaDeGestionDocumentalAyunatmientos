@@ -1,13 +1,14 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Usuario extends Authenticatable 
+class Usuario extends Authenticatable
 {
-    use HasFactory, Notifiable; 
+    use HasFactory, Notifiable;
 
     protected $table = 'tb_usuarios';
     protected $primaryKey = 'id_usuario';
@@ -28,4 +29,9 @@ class Usuario extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function usuarioAreaRols()
+    {
+        return $this->hasMany(UsuarioAreaRol::class, 'id_usuario');
+    }
 }

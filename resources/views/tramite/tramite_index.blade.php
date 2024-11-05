@@ -30,7 +30,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $tramites->id_tramite }}</td>
-                                        <td>{{ $tramites->area_id }}</td>
+                                        <td>{{ $tramites->area_nombre }}</td>
                                         <td>{{ $tramites->usuario_nombre }} {{ $tramites->usuario_apellidoP }} {{ $tramites->usuario_apellidoM }}</td>
                                         <td>{{ $tramites->fecha_inicio }}</td>
                                         <td>{{ $tramites->fecha_limite }}</td>

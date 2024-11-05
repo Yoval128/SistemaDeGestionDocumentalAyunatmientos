@@ -6,43 +6,41 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Asignación de Roles</h3>
+                        <h3 class="card-title">Asignación de Áreas</h3>
 
-                        <a href="{{ route('rol_alta') }}">
-                            <button type="button" class="btn btn-warning mb-3">Nuevo Rol</button>
+                        <a href="{{ route('areas_alta') }}">
+                            <button type="button" class="btn btn-warning mb-3">Nueva Asignación</button>
                         </a>
 
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ID Rol</th>
-                                    <th>Rol</th>
-                                    <th>Descripcción</th>
+                                    <th>ID Area</th>
+                                    <th>Área</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($roles->isEmpty())
+                                @if ($areas->isEmpty())
                                     <tr>
-                                        <td colspan="5" class="text-center">No hay roles disponibles.</td>
+                                        <td colspan="6" class="text-center">No hay areaes disponibles.</td>
                                     </tr>
                                 @else
-                                    @foreach ($roles as $key => $rol)
+                                    @foreach ($areas as $key => $area)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $rol->id_rol }}</td>
-                                            <td>{{ $rol->nombre}}</td>
-                                            <td>{{ $rol->descripccion }}</td>
+                                            <td>{{ $area->id_area }}</td>
+                                            <td>{{ $area->nombre }}</td>
                                             <td>
-                                                <a href="{{ route('rol_modificar', ['id' => $rol->id_rol]) }}">
+                                                <a href="{{ route('areas_modificar', ['id' => $area->id_area]) }}">
                                                     <button type="button" class="btn btn-warning btn-sm">Editar</button>
                                                 </a>
-                                                <a href="{{ route('rol_eliminar', ['id' => $rol->id_rol]) }}">
+                                                <a href="{{ route('areas_eliminar', ['id' => $area->id_area]) }}">
                                                     <button type="button" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('¿Seguro que quieres borrar este rol?')">Borrar</button>
+                                                        onclick="return confirm('¿Seguro que quieres borrar esta asignación?')">Borrar</button>
                                                 </a>
-                                                <a href="{{ route('rol_detalle', ['id' => $rol->id_rol]) }}">
+                                                <a href="{{ route('areas_detalle', ['id' => $area->id_area]) }}">
                                                     <button type="button" class="btn btn-info btn-sm">Detalle</button>
                                                 </a>
                                             </td>

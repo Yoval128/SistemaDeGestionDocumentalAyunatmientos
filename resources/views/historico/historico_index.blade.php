@@ -31,28 +31,30 @@
                                         <td colspan="8" class="text-center">No hay registros disponibles.</td>
                                     </tr>
                                 @else
-                                    @foreach ($datos as $key => $historico)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $historico->id_historico }}</td>
-                                            <td>{{ $historico->usuario_nombre }} {{ $historico->usuario_apellidoP }} {{ $historico->usuario_apellidoM }}</td>
-                                            <td>{{ $historico->descripcion_tramite }}</td>
-                                            <td>{{ $historico->tipo_documento }}</td>
-                                            <td>{{ $historico->valor_historico }}</td>
-                                            <td>{{ $historico->acceso_publico ? 'Sí' : 'No' }}</td>
-                                            <td>
-                                                <a href="{{ route('historico_modificar', ['id' => $historico->id_historico]) }}">
-                                                    <button type="button" class="btn btn-warning btn-sm">Editar</button>
-                                                </a>
-                                                <a href="{{ route('historico_eliminar', ['id' => $historico->id_historico]) }}">
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
-                                                </a>
-                                                <a href="{{ route('historico_detalle', ['id' => $historico->id_historico]) }}">
-                                                    <button type="button" class="btn btn-info">Detalle</button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @foreach ($datos as $key => $historico)
+                              {{--  // {{ dd($historico) }} -- Esto va a mostrar los valores de cada objeto 'historico' --}}
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $historico->id_historico }}</td>
+                                    <td>{{ $historico->usuario_nombre }} {{ $historico->usuario_apellidoP }} {{ $historico->usuario_apellidoM }}</td>
+                                    <td>{{ $historico->descripcion_tramite }}</td>
+                                    <td>{{ $historico->tipo_documento }}</td>
+                                    <td>{{ $historico->valor_historico }}</td>
+                                    <td>{{ $historico->acceso_publico ? 'Sí' : 'No' }}</td>
+                                    <td>
+                                        <a href="{{ route('historico_modificar', ['id' => $historico->id_historico]) }}">
+                                            <button type="button" class="btn btn-warning btn-sm">Editar</button>
+                                        </a>
+                                        <a href="{{ route('historico_eliminar', ['id' => $historico->id_historico]) }}">
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
+                                        </a>
+                                        <a href="{{ route('historico_detalle', ['id' => $historico->id_historico]) }}">
+                                            <button type="button" class="btn btn-info">Detalle</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            
                                 @endif
                             </tbody>
                         </table>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tb_tramite', function (Blueprint $table) {
             $table->bigIncrements('id_tramite');
-            $table->bigInteger('id_area'); // Foránea que enlaza con la tabla de áreas (departamento)
-            $table->bigInteger('id_usuario');  //Foránea que enlaza con la tabla de usuarios para indicar el responsable
+            $table->integer('id_area'); // Foránea que enlaza con la tabla de áreas (departamento)
+            $table->integer('id_usuario');  //Foránea que enlaza con la tabla de usuarios para indicar el responsable
             $table->date('fecha_inicio');   //Fecha de inicio del trámite
             $table->date('fecha_limite');   //Fecha límite para finalizar el trámite
             $table->string('estado');  //('en_proceso', 'pendiente', 'finalizado'), //Estado del trámite

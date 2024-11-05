@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_areas', function (Blueprint $table) {
-            $table->bigIncrements('id_area');
-            $table->string('nombre', 30);
-            $table->text('descripccion');
-            $table->boolean('activo');
+        Schema::create('usuario_area_rol', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_areas');
+        Schema::dropIfExists('usuario_area_rol');
     }
 };

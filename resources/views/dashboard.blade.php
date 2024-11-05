@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    
     <div class="header-home">
         <div class="greeting-box">
             <h3>¡Hola, bienvenido {{ $user->nombre }}!</h3>
@@ -24,7 +23,8 @@
             <div class="menu-box">
                 <a href="{{ route('usuario_index') }}">
                     <div class="menu-icon">
-                        <img src="/path/to/user-icon.png" alt="Usuarios">
+                        <img src="{{ asset('img/icon/user-interface.png') }}" alt="Usuarios">
+                        <img src="public/img/icon/user-interface.png" alt="Usuarios">
                     </div>
                     <div class="menu-title">
                         <h2>Usuarios</h2>
@@ -76,6 +76,48 @@
                     </div>
                 </a>
             </div>
+
+            <div class="menu-box">
+                <a href="{{ route('areas_index') }}">
+                    <div class="menu-icon">
+                        <img src="public/img/icon/area-icon.png" alt="Asigancion Area">
+                    </div>
+                    <div class="menu-title">
+                        <h2>Area</h2>
+                    </div>
+                    <div class="menu-description">
+                        <p>Consulta y asignación las areas</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="menu-box">
+                <a href="{{ route('rol_index') }}">
+                    <div class="menu-icon">
+                        <img src="public/img/icon/rol-icon.png" alt="Roles">
+                    </div>
+                    <div class="menu-title">
+                        <h2>Roles</h2>
+                    </div>
+                    <div class="menu-description">
+                        <p>Consulta y asignación de Roles</p>
+                    </div>
+                </a>
+            </div>
+            <div class="menu-box">
+                <a href="{{ route('usuario_area_rol_index') }}">
+                    <div class="menu-icon">
+                        <img src="public/img/icon/rol-icon.png" alt="">
+                    </div>
+                    <div class="menu-title">
+                        <h2>Asignacion de Areas y Roles a Usuarios</h2>
+                    </div>
+                    <div class="menu-description">
+                        <p>Consulta y asignación de Usuarios a Roles y Areas</p>
+                    </div>
+                </a>
+            </div>
+
         </div>
     </div>
 

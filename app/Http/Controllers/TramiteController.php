@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tramite;
 use App\Models\Usuario;
+use App\Models\Area;
 
 class TramiteController extends Controller
 {
@@ -25,34 +26,39 @@ class TramiteController extends Controller
     public function tramite_index()
     {
         $query = \DB::select("SELECT 
-            t.id_tramite AS id_tramite, 
-            t.id_area AS area_id,
-            t.id_usuario AS usuario_id,
-            u.nombre AS usuario_nombre,
-            u.apellidoP AS usuario_apellidoP,
-            u.apellidoM AS usuario_apellidoM,
-            t.fecha_inicio, 
-            t.fecha_limite, 
-            t.estado
-        FROM 
-            tb_tramite AS t
-        JOIN 
-            tb_usuarios AS u ON t.id_usuario = u.id_usuario");
-
+                t.id_tramite AS id_tramite, 
+                t.id_area AS area_id,
+                a.nombre AS area_nombre,  -- Aquí estamos obteniendo el nombre del área
+                t.id_usuario AS usuario_id,
+                u.nombre AS usuario_nombre,
+                u.apellidoP AS usuario_apellidoP,
+                u.apellidoM AS usuario_apellidoM,
+                t.fecha_inicio, 
+                t.fecha_limite, 
+                t.estado
+            FROM 
+                tb_tramite AS t
+            JOIN 
+                tb_usuarios AS u ON t.id_usuario = u.id_usuario
+            JOIN 
+                tb_areas AS a ON t.id_area = a.id_area");
+    
         return view(
             'tramite.tramite_index',
             [
                 'tramite' => Tramite::all(),
                 'usuarios' => Usuario::all(),
+                'reas' => Area::all(),
                 'datos' => $query,
             ]
         );
     }
-
+    
     public function tramite_alta()
     {
         return view('tramite.tramite_alta')->with([
-            'usuarios' => Usuario::all()
+            'usuarios' => Usuario::all(),
+            'areas' => Area::all(),
         ]);
     }
 
@@ -102,10 +108,12 @@ class TramiteController extends Controller
 
     public function tramite_modificar(Tramite $id)
     {
+        $areas = Area::all();
         $usuarios = Usuario::all();
         return view('tramite.tramite_modificacion')->with([
             'tramite' => $id,
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'areas' => $areas
         ]);
     }
 
@@ -169,11 +177,13 @@ class TramiteController extends Controller
     {
         $tramite = Tramite::find($id);
 
+        $areas = Area::find($id);
         $usuario = Usuario::find($tramite->id_usuario);
 
         return view('tramite.tramite_detalle')->with([
             'tramite' => $tramite,
-            'usuario' => $usuario
+            'usuario' => $usuario,
+            'areas' => $areas,
         ]);
     }
 }

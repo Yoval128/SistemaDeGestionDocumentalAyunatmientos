@@ -20,11 +20,22 @@
             <ul class="list-group">
                 <li class="list-group-item"><strong>Inicio</strong></li>
                 <li class="list-group-item"><a href="{{ route('dashboard') }}">Ir a Home</a></li>
+              
+                <li class="list-group-item"><strong>Areas</strong></li>
+                <li class="list-group-item"><a href="{{ route('areas_index') }}">Mostrar Areas</a></li>
+                <li class="list-group-item"><a href="{{ route('areas_alta') }}">Crear Areas</a></li>
+        
+                <li class="list-group-item"><strong>Roles</strong></li>
+                <li class="list-group-item"><a href="{{ route('rol_index') }}">Mostrar Roles</a></li>
+                <li class="list-group-item"><a href="{{ route('rol_alta') }}">Crear Roles</a></li>
         
                 <li class="list-group-item"><strong>Usuarios</strong></li>
                 <li class="list-group-item"><a href="{{ route('usuario_index') }}">Mostrar Usuarios</a></li>
                 <li class="list-group-item"><a href="{{ route('usuario_alta') }}">Crear Usuario</a></li>
-        
+               
+                <li class="list-group-item"><strong>Asinacion de Usuaio a Roles y Areas</strong></li>
+                <li class="list-group-item"><a href="{{ route('usuario_area_rol_index') }}">Mostrar lista de Asignaciones</a></li>
+               
                 <li class="list-group-item"><strong>Trámites</strong></li>
                 <li class="list-group-item"><a href="{{ route('tramite_index') }}">Mostrar Trámites</a></li>
                 <li class="list-group-item"><a href="{{ route('tramite_alta') }}">Crear Trámite</a></li>
