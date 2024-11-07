@@ -18,11 +18,19 @@
 
     <div class="d-flex">
         <div class="sidebar">
-            <h5>Menú de Navegación</h5>
+            <h5>Acciones Rapidas</h5>
             <ul class="list-group">
                 <!-- Inicio -->
                 <li class="list-group-item active"><i class="fas fa-home"></i><strong>Inicio</strong></li>
                 <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fas fa-arrow-right"></i>Ir a Home</a></li>
+                <li class="list-group-item">
+    <form action="{{ route('logout') }}" method="post">
+        @csrf
+        <button class="btn-cerrar" type="submit">Cerrar Sesión</button>
+    </form>
+</li>
+
+
 
                 <!-- Áreas -->
                 <li class="list-group-item"><strong>Áreas</strong></li>

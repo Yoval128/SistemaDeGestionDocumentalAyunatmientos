@@ -1,21 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="header-home">
-        <div class="greeting-box">
-            <h3>¡Hola, bienvenido {{ $user->nombre }}!</h3>
-        </div>
-        <div class="greeting-actions">
-            <form action="{{ route('logout') }}" method="post">
-                @csrf
-                <button type="submit">Cerrar Sesión</button>
-            </form>
-        </div>
-    </div>
+   
 
-
-    <div class="title-box">
-        <h1>Panel de Control</h1>
+    <div class="bienv"> 
+        <img src="img/icon/bienve.png" alt="">
     </div>
 
     <div class="description-box">
@@ -23,28 +12,23 @@
             <div class="menu-box">
                 <a href="{{ route('usuario_index') }}">
                     <div class="menu-icon">
-                        <img src="{{ asset('img/icon/user-interface.png') }}" alt="Usuarios">
-                        <img src="public/img/icon/user-interface.png" alt="Usuarios">
+                        <img src="{{ asset('img/icon/user.png') }}" alt="Usuarios">
                     </div>
                     <div class="menu-title">
-                        <h2>Usuarios</h2>
+                        <h2>Gestion de usuarios</h2>
                     </div>
-                    <div class="menu-description">
-                        <p>Alta, modificación y eliminación de usuarios</p>
-                    </div>
+                    
                 </a>
             </div>
 
             <div class="menu-box">
                 <a href="{{ route('tramite_index') }}">
                     <div class="menu-icon">
-                        <img src="/path/to/tramite-icon.png" alt="Trámites">
+                    <img src="{{ asset('img/icon/tramite.png') }}" alt="Trámites">
+
                     </div>
                     <div class="menu-title">
-                        <h2>Trámites</h2>
-                    </div>
-                    <div class="menu-description">
-                        <p>Creación y gestión de trámites</p>
+                        <h2>Trámites disponibles</h2>
                     </div>
                 </a>
             </div>
@@ -52,13 +36,10 @@
             <div class="menu-box">
                 <a href="{{ route('concentracion_index') }}">
                     <div class="menu-icon">
-                        <img src="/path/to/concentracion-icon.png" alt="Concentración">
+                        <img src="img/icon/concentracion.png" alt="Concentración">
                     </div>
                     <div class="menu-title">
-                        <h2>Concentración</h2>
-                    </div>
-                    <div class="menu-description">
-                        <p>Gestión de expedientes procesados</p>
+                        <h2>Expedientes</h2>
                     </div>
                 </a>
             </div>
@@ -66,13 +47,10 @@
             <div class="menu-box">
                 <a href="{{ route('historico_index') }}">
                     <div class="menu-icon">
-                        <img src="/path/to/historico-icon.png" alt="Histórico">
+                        <img src="img/icon/historico.png" alt="Histórico">
                     </div>
                     <div class="menu-title">
-                        <h2>Histórico</h2>
-                    </div>
-                    <div class="menu-description">
-                        <p>Consulta de documentos históricos</p>
+                        <h2>Consultar histórico</h2>
                     </div>
                 </a>
             </div>
@@ -80,13 +58,10 @@
             <div class="menu-box">
                 <a href="{{ route('areas_index') }}">
                     <div class="menu-icon">
-                        <img src="public/img/icon/area-icon.png" alt="Asigancion Area">
+                        <img src="img/icon/area.png" alt="Asigancion Area">
                     </div>
                     <div class="menu-title">
-                        <h2>Area</h2>
-                    </div>
-                    <div class="menu-description">
-                        <p>Consulta y asignación las areas</p>
+                        <h2>Áreas asignadas</h2>
                     </div>
                 </a>
             </div>
@@ -94,32 +69,59 @@
             <div class="menu-box">
                 <a href="{{ route('rol_index') }}">
                     <div class="menu-icon">
-                        <img src="public/img/icon/rol-icon.png" alt="Roles">
+                        <img src="img/icon/rol.png" alt="Roles">
                     </div>
                     <div class="menu-title">
-                        <h2>Roles</h2>
-                    </div>
-                    <div class="menu-description">
-                        <p>Consulta y asignación de Roles</p>
+                        <h2>Configuración de roles</h2>
                     </div>
                 </a>
             </div>
             <div class="menu-box">
                 <a href="{{ route('usuario_area_rol_index') }}">
                     <div class="menu-icon">
-                        <img src="public/img/icon/rol-icon.png" alt="">
+                        <img src="img/icon/asignar.png" alt="Asignar roles y áreas">
                     </div>
                     <div class="menu-title">
-                        <h2>Asignacion de Areas y Roles a Usuarios</h2>
-                    </div>
-                    <div class="menu-description">
-                        <p>Consulta y asignación de Usuarios a Roles y Areas</p>
+                        <h2>Asignar roles y áreas</h2>
                     </div>
                 </a>
             </div>
 
         </div>
     </div>
+
+    <div class="importante">
+        <h3>
+            IMPORTANTE
+        </h3>
+        <p> 
+        La administración eficiente de documentos históricos es clave para preservar, organizar y acceder fácilmente a información relevante
+         a lo largo del tiempo. Un software de gestión documental en un archivo histórico permite digitalizar y clasificar documentos, agilizar
+         la búsqueda de información y garantizar la seguridad y conservación de los archivos.
+        </p>
+    </div>
+
+
+
+    <div class="gobierno">
+        <h3>
+             Marco Legal y proteccion de datos Gobierno de México 
+        </h3>
+        <br>
+        <p> 
+        El Gobierno de México es el titular de todos los datos proporcionados a través de este programa. Se requiere un uso responsable de esta información; cualquier uso indebido podría derivar en sanciones legales.
+        Los datos aquí almacenados son de carácter confidencial y están protegidos bajo las leyes y normativas vigentes en México. Cualquier consulta, procesamiento o difusión no autorizada de la información será considerada una infracción y será tratada de acuerdo con las disposiciones legales correspondientes.
+        </p>
+    </div>
+
+    <div class="gob-img">
+        <img src="img/icon/gobierno.png" alt="">
+    </div>
+
+
+
+
+
 
     {{-- Descomentar esto si necesitas mostrar alertas de trámites --}}
     {{-- <div class="alerts-section">

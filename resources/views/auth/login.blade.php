@@ -12,12 +12,16 @@
 <body>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-6">
-                <img src="/images/logo_empresa.png" class="img-fluid" alt="Logo Empresa">
+            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
+                <img class="imagen1 img-fluid" src="{{ asset('img/logo/Optilinex33.png') }}" alt="Logo Empresa">
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <h3 class="card-title text-center">Iniciar Sesión</h3>
+
+                    <div class="text1 text-center">
+                        <p>Accede a tu cuenta para comenzar a explorar.</p>
+                    </div>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -39,13 +43,16 @@
                             <label for="password" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-warning">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-warning w-100">Iniciar Sesión</button>
                     </form>
+
+                    <div class="dere-text">
+                        <p>© Optilinex. Todos los derechos reservados.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

@@ -12,22 +12,36 @@ body {
     color: #fff; /* Texto blanco */
     padding: 20px;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: all 0.3s ease; /* Transición suave */
+    transition: all 0.3s ease; 
+    background-color: #000;
 }
 
-.sidebar h5 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #fff;
-    letter-spacing: 1px;
+.btn-cerrar {
+    background: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    color: inherit; /* Hereda el color del texto del contenedor */
+    cursor: pointer; /* Muestra el cursor de puntero */
+    padding: 0; /* Sin padding para evitar desplazamientos */
+    font: inherit; /* Hereda la fuente y tamaño del contenedor */
 }
+
 
 /* Listado de elementos del menú */
 .sidebar ul {
     list-style: none; /* Quitar los puntos de lista */
     padding-left: 0;
+    background-color: #000;
+
 }
+
+.btn-cerrar button {
+    background: transparent !important; /* Fondo transparente */
+    border: none !important; /* Sin borde */
+    color: inherit !important; /* Usa el color del texto actual o ajusta según sea necesario */
+    cursor: pointer; /* Cambia el cursor a puntero para indicar que es clickeable */
+    padding: 0; /* Opcional: elimina el padding si es necesario */
+}
+
 
 .sidebar .list-group-item {
     border: none; /* Sin bordes */
@@ -47,7 +61,7 @@ body {
 }
 
 .sidebar .list-group-item.active {
-    background-color: #007bff; /* Color azul para el ítem activo */
+    background-color: #fcc50f; /* Color azul para el ítem activo */
     color: #fff; /* Texto blanco */
 }
 
@@ -96,22 +110,35 @@ body {
     justify-content: space-between; /* Espaciado uniforme */
 }
 
+.bienv img{
+    width: 100% !important;
+    height: auto;
+    display: block; /* Asegura que se comporte como un bloque sin ajustar al centro */
+    object-fit: contain;
+    border-radius: 10px !important;
+    margin: 0;
+    padding: 0 0 45px 0 ;
+    
+    
+}
+
+
 .menu-box {
-    width: 23%;
-    margin: 1%;
+    width: 23% !important;
+    margin: 1% !important;
     padding: 15px; /* Mayor espacio interno */
-    border: 1px solid #ccc; /* Borde suave */
     border-radius: 8px; /* Bordes más suaves */
     text-align: center;
     background-color: #fff; /* Fondo blanco */
     transition: transform 0.3s, box-shadow 0.3s; /* Animación suave */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .menu-box:hover {
-    background: #f0f0f0; /* Color al pasar el mouse */
+    background: #ebf1af; /* Color al pasar el mouse */
     transform: translateY(-3px); /* Efecto de elevación */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    color: #000;
 }
 
 .menu-icon img {
@@ -136,7 +163,7 @@ body {
 }
 
 .menu-box a:hover {
-    color: #007bff; /* Color azul al pasar el ratón */
+    color: #000; /* Color azul al pasar el ratón */
     font-weight: bold; /* Negrita al pasar el ratón */
 }
 
@@ -240,4 +267,66 @@ body {
 .documentos-list a:hover {
     background-color: #007bff; /* Color al pasar el ratón */
     color: white; /* Cambiar color de texto al pasar el ratón */
+}
+
+.importante {
+    
+    padding: 20px; /* Espacio interno alrededor del contenido */
+    margin: 20px; /* Margen alrededor del div */
+    background-color: #fcd65a; /* Fondo claro para que resalte el borde negro */
+    border-radius: 5px; /* Bordes redondeados para un toque más suave */
+}
+
+.importante h3 {
+    color: #000; /* Color de texto oscuro para el título */
+    font-size: 24px; /* Tamaño de fuente grande para el título */
+    margin-bottom: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+.importante p {
+    color: #000; /* Color de texto gris suave para el párrafo */
+    font-size: 16px; /* Tamaño de fuente adecuado para el texto */
+    line-height: 1.6; 
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.gobierno {
+    background-color: #CE1126;
+    padding: 20px; /* Espacio interno alrededor del contenido */
+    margin: 20px; /* Margen alrededor del div */
+    border-radius: 5px; 
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.gobierno h3 {
+    /* Verde agua futurista */
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.gobierno p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.gob-img {
+    display: flex;           /* Centra el contenido dentro del div */
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;      /* Centra verticalmente */
+    width: 80vw;             /* Toma el ancho completo de la ventana */
+    height: 100vh;            /* Toma el alto completo de la ventana */
+    overflow: hidden;         /* Oculta el exceso de la imagen en los bordes */
+}
+
+.gob-img img {
+    width: 100%;              /* La imagen ocupa el ancho del contenedor */
+    height: 100%;             /* La imagen ocupa el alto del contenedor */
+    object-fit: cover;        /* La imagen se adapta sin deformarse */
+    border-radius: 15px;      /* Borde redondeado */
 }

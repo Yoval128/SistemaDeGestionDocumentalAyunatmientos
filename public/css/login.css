@@ -1,75 +1,133 @@
 /* Fondo del cuerpo */
 body {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #000 !important;
+    color: #333;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
-/* Estilo para el contenedor del formulario */
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Imagen de Logo */
+.imagen1 {
+    width: 100%;
+    height: 100%;
+    max-width: 400px !important;
+    max-height: 900px !important;
+    object-fit: cover; /* Asegura que la imagen mantenga proporciones */
+}
+
+/* Contenedor del formulario */
 .card {
-    border: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    background-color: #000 !important;
+    color: white !important;
+    border: 2px solid rgb(234, 227, 37) !important;
+    border-radius: 7px !important;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    height: 402px !important; /* Fija la altura de la card para igualar la imagen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Título del formulario */
 .card-title {
-  color: #f8d342; 
+    color: #fff; /* Texto blanco */
+    font-size: 1.5rem;
+    font-size: 48px;
+    font-family: 'Times New Roman', Times, serif    ;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
-/* Etiquetas del formulario */
+/* Texto introductorio */
+.text1 p {
+    color: #aaa; /* Texto gris claro */
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+
+/* Etiquetas y campos de entrada */
 .form-label {
-    color: #f8d342; 
+    color: #fff; /* Texto blanco */
+    font-size: 0.9rem;
+}
+
+.form-control {
+    background-color: #222; /* Fondo gris oscuro */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+}
+
+.form-control::placeholder {
+    color: #aaa; /* Texto placeholder en gris claro */
 }
 
 /* Botón de inicio de sesión */
 .btn-warning {
-    background-color: #f8d342;
-    border: none;
-    color: #000000;
+    background-color: #fcc50f !important;
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 }
 
-/* Imagen del logo */
-.img-fluid {
-    max-width: 100%;
-    height: auto;
+.btn-warning:hover {
+    background-color: #fbeca4 !important;
+    color: #000 !important;
+    border-color: #fbeca4 !important;
 }
 
-body {
-    background-color: #1c1c1c; /* Fondo negro elegante */
-    color: #fff; /* Texto blanco */
+.dere-text{
+    font-size: 13px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 0;
+    color: #aaa;
 }
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
 
-.container {
-    margin-top: 100px;
-}
+    .imagen1 {
+        max-width: 60%;
+        margin-bottom: 20px;
+    }
 
-.card {
-    background-color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
+    .card {
+        padding: 20px;
+    }
 
-.btn-primary {
-    background-color: #f8d342; /* Botón dorado */
-    border-color: #f8d342;
-}
+    .card-title {
+        font-size: 1.3rem;
+    }
 
-.btn-primary:hover {
-    background-color: #e0bb35; /* Botón dorado oscuro */
-    border-color: #e0bb35;
-}
-
-.btn-secondary {
-    background-color: #343a40; /* Botón gris oscuro */
-    border-color: #343a40;
-}
-
-h3 {
-   color: #f8d342; 
-}
-
-label {
-    color: #000; /* Texto negro para etiquetas */
+    .form-control,
+    .btn-warning {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
 }
