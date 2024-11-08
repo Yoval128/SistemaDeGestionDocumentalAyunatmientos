@@ -10,17 +10,40 @@ use App\Models\Rol;
 
 class UsuarioAreaRolController extends Controller
 {
-    public function usuario_area_rol_index()
+    public function usuario_area_rol_index(Request $request)
     {
-        $asignaciones = UsuarioAreaRol::with(['usuario', 'area', 'rol'])->get();
-
+        // Recibimos los datos de búsqueda desde el formulario
+        $buscar = $request->get('buscar', '');
+        $fecha_asignacion = $request->get('fecha_asignacion', '');
+    
+        // Iniciamos la consulta con las relaciones necesarias
+        $asignacionesQuery = UsuarioAreaRol::with(['usuario', 'area', 'rol']);
+    
+        // Si hay un término de búsqueda
+        if ($buscar != '') {
+            $asignacionesQuery->buscar($buscar);
+        }
+    
+        // Si hay una fecha de asignación seleccionada, filtramos por fecha
+        if ($fecha_asignacion != '') {
+            $asignacionesQuery->whereDate('fecha_asignacion', $fecha_asignacion);
+        }
+    
+        // Paginar los resultados
+        $asignaciones = $asignacionesQuery->paginate(5);
+    
+        // Devolver los datos a la vista
         return view('UsuarioAreaRol.usuario_area_rol_index', [
-            'usuarios' => Usuario::all(),
+            'asignaciones' => $asignaciones,
             'areas' => Area::all(),
             'roles' => Rol::all(),
-            'asignaciones' => $asignaciones,
+            'usuarios' => Usuario::all(),
+            'buscar' => $buscar,
+            'fecha_asignacion' => $fecha_asignacion,
         ]);
     }
+    
+
 
     public function usuario_area_rol_registrar(Request $request)
     {
@@ -40,21 +63,21 @@ class UsuarioAreaRolController extends Controller
     }
 
     public function usuario_area_rol_modificar(UsuarioAreaRol $id)
-{
-    $id->fecha_asignacion = \Carbon\Carbon::parse($id->fecha_asignacion);
+    {
+        $id->fecha_asignacion = \Carbon\Carbon::parse($id->fecha_asignacion);
 
-    return view('UsuarioAreaRol.usuario_area_rol_modificar')->with([
-        'asignacion' => $id,
-        'usuarios' => Usuario::all(),
-        'areas' => Area::all(),
-        'roles' => Rol::all(),
-    ]);
-}
+        return view('UsuarioAreaRol.usuario_area_rol_modificar')->with([
+            'asignacion' => $id,
+            'usuarios' => Usuario::all(),
+            'areas' => Area::all(),
+            'roles' => Rol::all(),
+        ]);
+    }
 
 
     public function usuario_area_rol_actualizar(Request $request, UsuarioAreaRol $id)
     {
-       
+
         $this->validate($request, [
             'id_usuario' => 'required|exists:tb_usuarios,id_usuario',
             'id_area' => 'required|exists:tb_areas,id_area',

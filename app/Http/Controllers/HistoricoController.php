@@ -15,33 +15,38 @@ class HistoricoController extends Controller
             $this->middleware('auth');
         } */
 
-    public function historico_index()
-    {
-        $query = \DB::select(" SELECT 
-                t.id_tramite AS id_tramite, 
-                t.observaciones AS descripcion_tramite, 
-                u.nombre AS usuario_nombre,
-                u.apellidoP AS usuario_apellidoP,
-                u.apellidoM AS usuario_apellidoM,
-                h.id_historico AS id_historico,
-                h.tipo_documento,
-                h.valor_historico,
-                h.acceso_publico,
-                h.restricciones_acceso,
-                h.documentos_adjuntos
-            FROM 
-                tb_tramite AS t
-            JOIN 
-                tb_usuarios AS u ON t.id_usuario = u.id_usuario
-            LEFT JOIN 
-                tb_historico AS h ON t.id_tramite = h.id_tramite ");
+        public function historico_index()
+        { $query = \DB::table('tb_historico as h')
+            ->join('tb_tramite as t', 'h.id_tramite', '=', 't.id_tramite')  // Unir con la tabla de trámites
+            ->join('tb_usuarios as u', 'h.id_usuario_asigando', '=', 'u.id_usuario')  // Unir con la tabla de usuarios
+            ->join('tb_areas as a', 't.id_area', '=', 'a.id_area')  // Unir con la tabla de áreas
+            ->select(
+                'h.id_historico',
+                'u.nombre as usuario_nombre',
+                'u.apellidoP as usuario_apellidoP',
+                'u.apellidoM as usuario_apellidoM',
+                'a.nombre as area_nombre',
+                't.id_tramite',
+                't.observaciones as descripcion_tramite',
+                'h.tipo_documento',
+                'h.valor_historico',
+                'h.acceso_publico',
+                'h.restricciones_acceso',
+                'h.documentos_adjuntos',
+                'h.created_at',
+                'h.updated_at'
+            )
+            ->get();  // Obtener todos los registros
 
+        // Devolver la vista con los datos
         return view('historico.historico_index', [
             'usuarios' => Usuario::all(),
             'tramites' => Tramite::all(),
-            'datos' => $query,
+            'datos' => $query,  // Pasamos los datos a la vista
         ]);
     }
+    
+
 
     public function historico_alta()
     {

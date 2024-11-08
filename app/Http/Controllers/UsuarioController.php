@@ -11,6 +11,7 @@ class UsuarioController extends Controller
 {
     public function login()
     {
+
         return view('auth.login');
     }
 
@@ -21,7 +22,6 @@ class UsuarioController extends Controller
             'password' => 'required',
         ]);
 
-        // Usar Auth::attempt para la autenticación
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->route('dashboard');
         }
@@ -34,9 +34,8 @@ class UsuarioController extends Controller
 
     public function testLogin(Request $request)
     {
-        // Cambia estos valores según sea necesario
         $email = 'admin@hotmail.com'; // Email del usuario
-        $password = '12345'; // Reemplaza con la contraseña real
+        $password = '12345'; //contraseña real
 
         $user = Usuario::where('email', $email)->first();
 
@@ -60,10 +59,12 @@ class UsuarioController extends Controller
         return redirect()->route('login')->with('success', 'Has cerrado sesión.');
     }
 
-    public function usuario_index()
+    public function usuario_index(Request $request)
     {
-        return view('usuario.usuario_index')->with(['usuario' => Usuario::all()]);
+        $usuario = Usuario::Buscar($request->buscar)->paginate(5);
+        return view('usuario.usuario_index')->with(['usuario' => $usuario]);
     }
+    
     public function usuario_alta()
     {
         return view('usuario.usuario_alta');
