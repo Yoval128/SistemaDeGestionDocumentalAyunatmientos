@@ -15,38 +15,14 @@ class HistoricoController extends Controller
             $this->middleware('auth');
         } */
 
-        public function historico_index()
-        { $query = \DB::table('tb_historico as h')
-            ->join('tb_tramite as t', 'h.id_tramite', '=', 't.id_tramite')  // Unir con la tabla de trámites
-            ->join('tb_usuarios as u', 'h.id_usuario_asigando', '=', 'u.id_usuario')  // Unir con la tabla de usuarios
-            ->join('tb_areas as a', 't.id_area', '=', 'a.id_area')  // Unir con la tabla de áreas
-            ->select(
-                'h.id_historico',
-                'u.nombre as usuario_nombre',
-                'u.apellidoP as usuario_apellidoP',
-                'u.apellidoM as usuario_apellidoM',
-                'a.nombre as area_nombre',
-                't.id_tramite',
-                't.observaciones as descripcion_tramite',
-                'h.tipo_documento',
-                'h.valor_historico',
-                'h.acceso_publico',
-                'h.restricciones_acceso',
-                'h.documentos_adjuntos',
-                'h.created_at',
-                'h.updated_at'
-            )
-            ->get();  // Obtener todos los registros
+    public function historico_index(Request $request)
+    {
+        $historicos = Historico::with(['usuario', 'tramite'])->Buscar($request->buscar)->paginate(5);
 
-        // Devolver la vista con los datos
         return view('historico.historico_index', [
-            'usuarios' => Usuario::all(),
-            'tramites' => Tramite::all(),
-            'datos' => $query,  // Pasamos los datos a la vista
+            'historicos' => $historicos,
         ]);
     }
-    
-
 
     public function historico_alta()
     {
@@ -62,7 +38,7 @@ class HistoricoController extends Controller
         //  dd($request->all());
 
         $this->validate($request, [
-            'id_usuario_asigando' => 'required|exists:tb_usuarios,id_usuario', // Validar que el usuario exista
+            'id_usuario_asigando' => 'required|exists:tb_usuarios,id_usuario',
             'id_tramite' => 'required',
             'tipo_documento' => 'required|string',
             'valor_historico' => 'required|string',
