@@ -105,7 +105,7 @@
 
     <div class="gobierno">
         <h3>
-             Marco Legal y proteccion de datos Gobierno de México 
+             Marco Legal y proteccion de datos del Gobierno de México 
         </h3>
         <br>
         <p> 

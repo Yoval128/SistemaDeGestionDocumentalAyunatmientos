@@ -12,13 +12,17 @@
                             <button type="button" class="btn btn-warning mb-3">Nuevo Rol</button>
                         </a>
 
-                        <table class="table table-striped">
+                        <!-- Botones para generar PDF y Excel -->
+                        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+                        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+
+                        <table id="roles-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>ID Rol</th>
                                     <th>Rol</th>
-                                    <th>Descripcción</th>
+                                    <th>Descripción</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -32,7 +36,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $rol->id_rol }}</td>
-                                            <td>{{ $rol->nombre}}</td>
+                                            <td>{{ $rol->nombre }}</td>
                                             <td>{{ $rol->descripccion }}</td>
                                             <td>
                                                 <a href="{{ route('rol_modificar', ['id' => $rol->id_rol]) }}">
@@ -56,4 +60,59 @@
             </div>
         </div>
     </div>
+
+    <!-- Incluir la librería jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Incluir la librería SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        // Función para generar el PDF
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("helvetica");
+            doc.setFontSize(10);
+
+            // Agregar título
+            doc.text('Asignación de Roles', 10, 10);
+            let y = 20;
+
+            // Obtener las filas de la tabla
+            const table = document.getElementById('roles-table');
+            Array.from(table.rows).forEach((row, index) => {
+                if (index === 0) return; // Saltar la fila del encabezado
+
+                const cells = row.cells;
+                const rowData = [
+                    cells[0].textContent, // #
+                    cells[1].textContent, // ID Rol
+                    cells[2].textContent, // Rol
+                    cells[3].textContent  // Descripción
+                ];
+
+                // Formatear y escribir los datos en el PDF
+                const rowText = rowData.join(' | ');
+                doc.text(rowText, 10, y);
+                y += 10;
+
+                // Si la página está llena, agregar una nueva
+                if (y > 270) {
+                    doc.addPage();
+                    y = 10;
+                }
+            });
+
+            // Descargar el PDF
+            doc.save('roles_asignacion.pdf');
+        });
+
+        // Función para generar el archivo Excel
+        document.getElementById('download-excel').addEventListener('click', function () {
+            const table = document.getElementById('roles-table');
+            const wb = XLSX.utils.table_to_book(table, { sheet: 'Roles' });
+            XLSX.writeFile(wb, 'roles_asignacion.xlsx');
+        });
+    </script>
 @endsection

@@ -12,7 +12,11 @@
                             <button type="button" class="btn btn-warning mb-3">Nuevo Registro Histórico</button>
                         </a>
 
-                        <table class="table table-striped">
+                        <!-- Botones para generar PDF y Excel -->
+                        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+                        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+
+                        <table id="historicos-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -32,7 +36,6 @@
                                     </tr>
                                 @else
                                 @foreach ($datos as $key => $historico)
-                              {{--  // {{ dd($historico) }} -- Esto va a mostrar los valores de cada objeto 'historico' --}}
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $historico->id_historico }}</td>
@@ -54,8 +57,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            
-                                @endif
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -63,4 +65,62 @@
             </div>
         </div>
     </div>
+
+    <!-- Incluir la librería jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Incluir la librería SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        // Función para generar el PDF
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("helvetica");
+            doc.setFontSize(10);
+
+            // Agregar título
+            doc.text('Lista de Históricos', 10, 10);
+            let y = 20;
+
+            // Obtener las filas de la tabla
+            const table = document.getElementById('historicos-table');
+            Array.from(table.rows).forEach((row, index) => {
+                if (index === 0) return; // Saltar la fila del encabezado
+
+                const cells = row.cells;
+                const rowData = [
+                    cells[0].textContent, // #
+                    cells[1].textContent, // ID
+                    cells[2].textContent, // Usuario Asignado
+                    cells[3].textContent, // Trámite
+                    cells[4].textContent, // Tipo de Documento
+                    cells[5].textContent, // Valor Histórico
+                    cells[6].textContent  // Acceso Público
+                ];
+
+                // Formatear y escribir los datos en el PDF
+                const rowText = rowData.join(' | ');
+                doc.text(rowText, 10, y);
+                y += 10;
+
+                // Si la página está llena, agregar una nueva
+                if (y > 270) {
+                    doc.addPage();
+                    y = 10;
+                }
+            });
+
+            // Descargar el PDF
+            doc.save('historicos_lista.pdf');
+        });
+
+        // Función para generar el archivo Excel
+        document.getElementById('download-excel').addEventListener('click', function () {
+            const table = document.getElementById('historicos-table');
+            const wb = XLSX.utils.table_to_book(table, { sheet: 'Históricos' });
+            XLSX.writeFile(wb, 'historicos_lista.xlsx');
+        });
+    </script>
 @endsection

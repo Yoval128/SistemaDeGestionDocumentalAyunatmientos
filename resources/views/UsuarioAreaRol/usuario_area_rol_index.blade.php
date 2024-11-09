@@ -23,7 +23,7 @@
                     <select class="form-select" id="id_usuario" name="id_usuario" required>
                         <option value="" disabled selected>Selecciona un Usuario...</option>
                         @foreach ($usuarios as $usuario)
-                            <option value="{{ $usuario->id_usuario }}"
+                            <option value="{{ $usuario->id_usuario }} "
                                 {{ old('id_usuario') == $usuario->id_usuario ? 'selected' : '' }}>
                                 {{ $usuario->nombre }} {{ $usuario->apellidoP }} {{ $usuario->apellidoM }}
                             </option>
@@ -63,7 +63,12 @@
         <br>
         <hr>
         <h3>Asignaciones de Usuarios a Áreas y Roles</h3>
-        <table class="table table-bordered">
+
+        <!-- Botones para descargar PDF y Excel -->
+        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+
+        <table id="asignaciones-table" class="table table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
@@ -83,15 +88,13 @@
                             {{ $asignacion->usuario->apellidoM }}</td>
                         <td>{{ $asignacion->area->nombre }}</td>
                         <td>{{ $asignacion->rol->nombre }}</td>
-                        {{-- <td>{{ $asignacion->fecha_asignacion }}</td> --}}
                         <td>
-                            <a
-                                href="{{ route('usuario_area_rol_modificar', ['id' => $asignacion->id_usuario_area_rol]) }}">
+                            <a href="{{ route('usuario_area_rol_modificar', ['id' => $asignacion->id_usuario_area_rol]) }}">
                                 <button type="button" class="btn btn-warning btn-sm">Editar</button>
                             </a>
                             <a href="{{ route('usuario_area_rol_eliminar', ['id' => $asignacion->id_usuario_area_rol]) }}">
                                 <button type="button" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Seguro que quieres borrar este rol?')">Borrar</button>
+                                    onclick="return confirm('¿Seguro que quieres borrar esta asignación?')">Borrar</button>
                             </a>
                             <a href="{{ route('usuario_area_rol_detalle', ['id' => $asignacion->id_usuario_area_rol]) }}">
                                 <button type="button" class="btn btn-info btn-sm">Detalle</button>
@@ -102,4 +105,60 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Incluir la librería jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Incluir la librería SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        // Función para generar el PDF
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("helvetica");
+            doc.setFontSize(10);
+
+            // Título
+            doc.text('Asignación de Usuarios a Áreas y Roles', 10, 10);
+            let y = 20;
+
+            // Recorrer las filas de la tabla
+            const table = document.getElementById('asignaciones-table');
+            Array.from(table.rows).forEach((row, index) => {
+                if (index === 0) return; // Saltar la fila del encabezado
+
+                const cells = row.cells;
+                const rowData = [
+                    cells[0].textContent, // #
+                    cells[1].textContent, // ID
+                    cells[2].textContent, // Usuario
+                    cells[3].textContent, // Área
+                    cells[4].textContent  // Rol
+                ];
+
+                // Agregar fila al PDF
+                const rowText = rowData.join(' | ');
+                doc.text(rowText, 10, y);
+                y += 10;
+
+                // Si la página está llena, agregar una nueva
+                if (y > 270) {
+                    doc.addPage();
+                    y = 10;
+                }
+            });
+
+            // Descargar PDF
+            doc.save('asignaciones_usuarios_areas_roles.pdf');
+        });
+
+        // Función para generar el archivo Excel
+        document.getElementById('download-excel').addEventListener('click', function () {
+            const table = document.getElementById('asignaciones-table');
+            const wb = XLSX.utils.table_to_book(table, { sheet: 'Asignaciones' });
+            XLSX.writeFile(wb, 'asignaciones_usuarios_areas_roles.xlsx');
+        });
+    </script>
 @endsection
