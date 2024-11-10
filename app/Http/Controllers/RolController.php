@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rol;
+
 class RolController extends Controller
 {
-    public function rol_index()
+    public function rol_index(Request $request)
     {
-        return view('roles.roles_index')->with(['roles' => Rol::all()]);
+        $roles = Rol::Buscar($request->buscar)->paginate(5);
+        return view('roles.roles_index')->with(['roles' => $roles]);
     }
+
     public function rol_alta()
     {
         return view('roles.roles_alta');

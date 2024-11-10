@@ -10,10 +10,13 @@ use App\Models\Usuario;
 
 class AreaController extends Controller
 {
-    public function areas_index()
+    public function areas_index(Request $request)
     {
-        return view('area.areas_index')->with(['areas' => Area::all()]);
+        $areas = Area::Buscar($request->buscar)->paginate(8);
+        return view('area.areas_index')->with(['areas' => $areas]);
     }
+
+
     public function areas_alta()
     {
         return view('area.areas_alta');

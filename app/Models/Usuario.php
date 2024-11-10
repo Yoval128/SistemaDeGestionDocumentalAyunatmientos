@@ -34,4 +34,20 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(UsuarioAreaRol::class, 'id_usuario');
     }
+
+    public function scopeBuscar($query, $buscar)
+    {
+        //dd("scope: " . $buscar);
+        if (trim($buscar) != "") {
+            $query->where(\DB::raw("CONCAT(id_usuario, '', nombre, '', apellidoM, '', apellidop, '', email, '', rol, '')"), "LIKE", "%$buscar%");
+        }
+    }
+
+    public function scopeTipo($query, $nombre)
+    {
+        if ($nombre != "") {
+            $query->where('nombre', $nombre);
+        }
+    }
+
 }

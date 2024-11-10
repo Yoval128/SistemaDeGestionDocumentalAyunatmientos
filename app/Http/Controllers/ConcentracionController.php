@@ -12,10 +12,26 @@ class ConcentracionController extends Controller
             $this->middleware('auth');
         } */
 
-    public function concentracion_index()
-    {
-        return view('concentracion.concentracion_index')->with(['concentraciones' => Concentracion::all()]);
-    }
+        public function concentracion_index(Request $request)
+        {
+            // Obtener los valores de 'buscar', 'fecha_inicio' y 'fecha_limite' desde el request
+            $buscar = $request->input('buscar');
+            $fecha_inicio = $request->input('fecha_inicio');
+            $fecha_limite = $request->input('fecha_limite');
+        
+            // Realizar la búsqueda utilizando el método de búsqueda en el modelo
+            $concentraciones = Concentracion::Buscar($buscar)
+                                             ->FechaInicio($fecha_inicio)
+                                             ->FechaLimite($fecha_limite)
+                                             ->paginate(5);
+        
+            // Pasar las variables a la vista
+            return view('concentracion.concentracion_index', compact('concentraciones', 'buscar', 'fecha_inicio', 'fecha_limite'));
+        }
+        
+        
+
+
     public function concentracion_alta()
     {
         return view('concentracion.concentracion_alta');
@@ -109,10 +125,10 @@ class ConcentracionController extends Controller
             'documentos_a_eliminar' => 'nullable|array',
             'documentos_a_eliminar.*' => 'string',
         ]);
-    
+
         // Manejo de archivos PDF
         $documentos = json_decode($id->archivo_pdf, true) ?: [];
-    
+
         if ($request->file('archivo_pdf')) {
             foreach ($request->file('archivo_pdf') as $file) {
                 $pdfName = time() . '_' . $file->getClientOriginalName();
@@ -120,7 +136,7 @@ class ConcentracionController extends Controller
                 $documentos[] = $pdfName;
             }
         }
-    
+
         // Eliminar documentos seleccionados
         if ($request->input('documentos_a_eliminar')) {
             foreach ($request->input('documentos_a_eliminar') as $key) {
@@ -132,7 +148,7 @@ class ConcentracionController extends Controller
             }
             $documentos = array_values($documentos); // Reindexar el array
         }
-    
+
         // Actualizar el registro
         $id->update([
             'clave' => $request->input('clave'),
@@ -151,10 +167,10 @@ class ConcentracionController extends Controller
             'archivo_pdf' => json_encode($documentos),
             'digitalizado' => (bool) $request->input('digitalizado'),
         ]);
-    
+
         return redirect()->route('concentracion_index')->with('success', 'Registro actualizado con éxito.');
     }
-    
+
 
 
     public function concentracion_detalle($id)

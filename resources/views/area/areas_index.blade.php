@@ -7,10 +7,35 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Asignación de Áreas</h3>
+                        
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                           
+                            <a href="{{ route('areas_alta') }}">
+                                <button type="button" class="btn btn-warning">Nueva Asignación</button>
+                            </a>
 
-                        <a href="{{ route('areas_alta') }}">
-                            <button type="button" class="btn btn-warning mb-3">Nueva Asignación</button>
-                        </a>
+                            <form action="{{ route('areas_index') }}" method="GET" enctype="multipart/form-data" class="d-flex align-items-center">
+                                {{ csrf_field() }}
+                                
+                                <div class="form-floating me-2">
+                                    <input type="input" class="form-control" name="buscar" value="{{ old('buscar') }}"
+                                        id="floatingBuscar" placeholder="ejemplo: Roberto Vinicio"
+                                        aria-describedby="buscarHelp">
+                                    <label for="floatingBuscar">Buscar</label>
+                                    <div id="buscarHelp" class="form-text">
+                                        @if ($errors->first('buscar'))
+                                            <i>El campo Buscar no es correcto!!!</i>
+                                        @endif
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary me-2">Buscar</button>
+                            
+                                <a href="{{ route('areas_index') }}">
+                                    <button type="button" class="btn btn-danger">Reiniciar</button>
+                                </a>
+                            </form>
+                        </div>
 
                         <!-- Botones para generar PDF y Excel -->
                         <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
@@ -28,7 +53,11 @@
                             <tbody>
                                 @if ($areas->isEmpty())
                                     <tr>
+<<<<<<< HEAD
                                         <td colspan="4" class="text-center">No hay áreas disponibles.</td>
+=======
+                                        <td colspan="6" class="text-center">No hay áreas disponibles.</td>
+>>>>>>> origin/main
                                     </tr>
                                 @else
                                     @foreach ($areas as $key => $area)
@@ -53,6 +82,9 @@
                                 @endif
                             </tbody>
                         </table>
+
+                        {{ $areas->links('pagination::bootstrap-5') }}
+
                     </div>
                 </div>
             </div>
