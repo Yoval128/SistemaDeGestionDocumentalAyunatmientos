@@ -32,4 +32,31 @@ class UsuarioAreaRol extends Model
     {
         return $this->belongsTo(Rol::class, 'id_rol', 'id_rol');
     }
+
+    public function scopeBuscar($query, $buscar)
+    {
+        if (trim($buscar) != "") {
+            $query->where(function($query) use ($buscar) {
+                $query->whereHas('usuario', function($query) use ($buscar) {
+                    // Buscamos en el nombre completo del usuario
+                    $query->where(\DB::raw('CONCAT(nombre, " ", apellidoP, " ", apellidoM)'), 'LIKE', "%$buscar%");
+                })
+                ->orWhereHas('area', function($query) use ($buscar) {
+                    // Buscamos en el nombre del área
+                    $query->where('nombre', 'LIKE', "%$buscar%");
+                })
+                ->orWhereHas('rol', function($query) use ($buscar) {
+                    // Buscamos en el nombre del rol
+                    $query->where('nombre', 'LIKE', "%$buscar%");
+                });
+            });
+        }
+    }
+    
+    public function scopeTipo($query, $nombre)
+    {
+        if ($nombre != "") {
+            $query->where('id_usuario', 'LIKE', "%$nombre%");
+        }
+    }
 }

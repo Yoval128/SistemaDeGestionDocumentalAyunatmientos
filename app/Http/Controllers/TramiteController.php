@@ -23,37 +23,31 @@ class TramiteController extends Controller
         ]);
     } */
 
-    public function tramite_index()
+    public function tramite_index(Request $request)
     {
-        $query = \DB::select("SELECT 
-                t.id_tramite AS id_tramite, 
-                t.id_area AS area_id,
-                a.nombre AS area_nombre,  -- Aquí estamos obteniendo el nombre del área
-                t.id_usuario AS usuario_id,
-                u.nombre AS usuario_nombre,
-                u.apellidoP AS usuario_apellidoP,
-                u.apellidoM AS usuario_apellidoM,
-                t.fecha_inicio, 
-                t.fecha_limite, 
-                t.estado
-            FROM 
-                tb_tramite AS t
-            JOIN 
-                tb_usuarios AS u ON t.id_usuario = u.id_usuario
-            JOIN 
-                tb_areas AS a ON t.id_area = a.id_area");
+        $buscar = $request->get('buscar', ''); 
+        $fecha_inicio = $request->get('fecha_inicio', ''); 
+        $fecha_limite = $request->get('fecha_limite', '');
     
-        return view(
-            'tramite.tramite_index',
-            [
-                'tramite' => Tramite::all(),
-                'usuarios' => Usuario::all(),
-                'reas' => Area::all(),
-                'datos' => $query,
-            ]
-        );
+        // Construir la consulta de los trámites
+        $tramites = Tramite::with(['usuario', 'area'])
+            ->buscar($buscar) // Aplica la búsqueda por usuario, área o estado
+            ->fechaInicio($fecha_inicio) // Aplica el filtro por fecha de inicio
+            ->fechaLimite($fecha_limite) // Aplica el filtro por fecha límite
+            ->paginate(5); // Paginación
+    
+        return view('tramite.tramite_index')->with([
+            'tramites' => $tramites,
+            'usuarios' => Usuario::all(),
+            'areas' => Area::all(),
+            'buscar' => $buscar,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_limite' => $fecha_limite,
+        ]);
     }
     
+
+
     public function tramite_alta()
     {
         return view('tramite.tramite_alta')->with([

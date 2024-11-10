@@ -23,4 +23,18 @@ class Rol extends Model
         return $this->hasMany(UsuarioAreaRol::class, 'id_rol');
     }
 
+    public function scopeBuscar($query, $buscar)
+    {
+        //dd("scope: " . $buscar);
+        if (trim($buscar) != "") {
+            $query->where(\DB::raw("CONCAT(id_rol, '', nombre, '', descripccion, '')"), "LIKE", "%$buscar%");
+        }
+    }
+
+    public function scopeTipo($query, $nombre)
+    {
+        if ($nombre != "") {
+            $query->where('nombre', $nombre);
+        }
+    }
 }

@@ -15,31 +15,12 @@ class HistoricoController extends Controller
             $this->middleware('auth');
         } */
 
-    public function historico_index()
+    public function historico_index(Request $request)
     {
-        $query = \DB::select(" SELECT 
-                t.id_tramite AS id_tramite, 
-                t.observaciones AS descripcion_tramite, 
-                u.nombre AS usuario_nombre,
-                u.apellidoP AS usuario_apellidoP,
-                u.apellidoM AS usuario_apellidoM,
-                h.id_historico AS id_historico,
-                h.tipo_documento,
-                h.valor_historico,
-                h.acceso_publico,
-                h.restricciones_acceso,
-                h.documentos_adjuntos
-            FROM 
-                tb_tramite AS t
-            JOIN 
-                tb_usuarios AS u ON t.id_usuario = u.id_usuario
-            LEFT JOIN 
-                tb_historico AS h ON t.id_tramite = h.id_tramite ");
+        $historicos = Historico::with(['usuario', 'tramite'])->Buscar($request->buscar)->paginate(5);
 
         return view('historico.historico_index', [
-            'usuarios' => Usuario::all(),
-            'tramites' => Tramite::all(),
-            'datos' => $query,
+            'historicos' => $historicos,
         ]);
     }
 
@@ -57,7 +38,7 @@ class HistoricoController extends Controller
         //  dd($request->all());
 
         $this->validate($request, [
-            'id_usuario_asigando' => 'required|exists:tb_usuarios,id_usuario', // Validar que el usuario exista
+            'id_usuario_asigando' => 'required|exists:tb_usuarios,id_usuario',
             'id_tramite' => 'required',
             'tipo_documento' => 'required|string',
             'valor_historico' => 'required|string',
