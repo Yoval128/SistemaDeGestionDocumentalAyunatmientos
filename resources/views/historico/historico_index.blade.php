@@ -59,40 +59,14 @@
                                         <td colspan="8" class="text-center">No hay registros disponibles.</td>
                                     </tr>
                                 @else
-<<<<<<< HEAD
-                                @foreach ($datos as $key => $historico)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $historico->id_historico }}</td>
-                                    <td>{{ $historico->usuario_nombre }} {{ $historico->usuario_apellidoP }} {{ $historico->usuario_apellidoM }}</td>
-                                    <td>{{ $historico->descripcion_tramite }}</td>
-                                    <td>{{ $historico->tipo_documento }}</td>
-                                    <td>{{ $historico->valor_historico }}</td>
-                                    <td>{{ $historico->acceso_publico ? 'Sí' : 'No' }}</td>
-                                    <td>
-                                        <a href="{{ route('historico_modificar', ['id' => $historico->id_historico]) }}">
-                                            <button type="button" class="btn btn-warning btn-sm">Editar</button>
-                                        </a>
-                                        <a href="{{ route('historico_eliminar', ['id' => $historico->id_historico]) }}">
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
-                                        </a>
-                                        <a href="{{ route('historico_detalle', ['id' => $historico->id_historico]) }}">
-                                            <button type="button" class="btn btn-info">Detalle</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            @endif
-=======
                                     @foreach ($historicos as $key => $historico)
                                         <tr>
                                             <td>{{ $historicos->firstItem() + $key }}</td>
                                             <td>{{ $historico->id_historico }}</td>
-                                            <td>{{ $historico->usuario->nombre }} {{ $historico->usuario->apellidoP }}
-                                                {{ $historico->usuario->apellidoM }}</td>
+                                            <td>{{ $historico->usuario->nombre }} {{ $historico->usuario->apellidoP }} {{ $historico->usuario->apellidoM }}</td>
                                             <td>
                                                 @if ($historico->tramite)
-                                                    {{ $historico->tramite->estado }}
+                                                    {{ $historico->tramite->descripcion }}
                                                 @else
                                                     <span class="text-muted">Sin trámite asignado</span>
                                                 @endif
@@ -101,32 +75,28 @@
                                             <td>{{ $historico->valor_historico }}</td>
                                             <td>{{ $historico->acceso_publico ? 'Sí' : 'No' }}</td>
                                             <td>
-                                                <a
-                                                    href="{{ route('historico_modificar', ['id' => $historico->id_historico]) }}">
+                                                <a href="{{ route('historico_modificar', ['id' => $historico->id_historico]) }}">
                                                     <button type="button" class="btn btn-warning btn-sm">Editar</button>
                                                 </a>
-                                                <a
-                                                    href="{{ route('historico_eliminar', ['id' => $historico->id_historico]) }}">
+                                                <a href="{{ route('historico_eliminar', ['id' => $historico->id_historico]) }}">
                                                     <button type="button" class="btn btn-danger btn-sm"
                                                         onclick="return confirm('¿Seguro que quieres borrar este registro?')">
                                                         Borrar
                                                     </button>
                                                 </a>
-                                                <a
-                                                    href="{{ route('historico_detalle', ['id' => $historico->id_historico]) }}">
+                                                <a href="{{ route('historico_detalle', ['id' => $historico->id_historico]) }}">
                                                     <button type="button" class="btn btn-info">Detalle</button>
                                                 </a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @endif
->>>>>>> origin/main
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-between">
                             <div>
                                 <small>Mostrando {{ $historicos->firstItem() }} a {{ $historicos->lastItem() }}
-                                    de {{ $historicos->total() }} concentraciones</small>
+                                    de {{ $historicos->total() }} registros</small>
                             </div>
                             <div>
                                 {{ $historicos->links('pagination::bootstrap-5') }}
@@ -158,9 +128,9 @@
 
             // Obtener las filas de la tabla
             const table = document.getElementById('historicos-table');
-            Array.from(table.rows).forEach((row, index) => {
-                if (index === 0) return; // Saltar la fila del encabezado
+            const rows = table.querySelectorAll('tbody tr');
 
+            rows.forEach((row, index) => {
                 const cells = row.cells;
                 const rowData = [
                     cells[0].textContent, // #

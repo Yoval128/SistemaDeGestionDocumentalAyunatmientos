@@ -8,22 +8,13 @@
                     <div class="card-body">
                         <h3 class="card-title">Lista de Usuarios</h3>
 
-<<<<<<< HEAD
-                        <a href="{{ route('usuario_alta') }}">
-                            <button type="button" class="btn btn-warning mb-3">Nuevo Registro RAT</button>
-                        </a>
-
-                        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
-                        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
-
-                        <table id="usuarios-table" class="table table-striped">
-=======
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                         
+                            <!-- Botón para nuevo usuario -->
                             <a href="{{ route('usuario_alta') }}">
                                 <button type="button" class="btn btn-warning">Nuevo Usuario</button>
                             </a>
 
+                            <!-- Formulario de búsqueda -->
                             <form action="{{ route('usuario_index') }}" method="GET" class="d-flex align-items-center">
                                 {{ csrf_field() }}
 
@@ -46,10 +37,16 @@
                                     <button type="button" class="btn btn-danger">Reiniciar</button>
                                 </a>
                             </form>
+
+                            <!-- Botones para descargar PDF y Excel -->
+                            <div>
+                                <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+                                <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+                            </div>
                         </div>
 
-                        <table class="table table-striped">
->>>>>>> origin/main
+                        <!-- Tabla de usuarios -->
+                        <table id="usuarios-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -67,11 +64,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $usuarios->id_usuario }}</td>
-<<<<<<< HEAD
-                                        <td><img src="{{ 'img/' . $usuarios->foto }}" style="width: 50px; height:50px;"></td>
-=======
                                         <td><img src="{{ asset('img/' . $usuarios->foto) }}" style="width: 50px; height:50px;"></td>
->>>>>>> origin/main
                                         <td>{{ $usuarios->nombre }}</td>
                                         <td>{{ $usuarios->apellidoP . ' ' . $usuarios->apellidoM }}</td>
                                         <td>{{ $usuarios->email }}</td>
@@ -84,11 +77,7 @@
                                                 <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
                                             </a>
                                             <a href="{{ route('usuario_detalle', ['id' => $usuarios->id_usuario]) }}">
-<<<<<<< HEAD
-                                                <button type="button" class="btn btn-info">Detalle</button>
-=======
                                                 <button type="button" class="btn btn-info btn-sm">Detalle</button>
->>>>>>> origin/main
                                             </a>
                                         </td>
                                     </tr>
@@ -96,6 +85,7 @@
                             </tbody>
                         </table>
 
+                        <!-- Paginación -->
                         <div class="d-flex justify-content-between">
                             <div>
                                 <small>Mostrando {{ $usuario->firstItem() }} a {{ $usuario->lastItem() }} de {{ $usuario->total() }} usuarios</small>

@@ -24,7 +24,7 @@
                     <select class="form-select" id="id_usuario" name="id_usuario" required>
                         <option value="" disabled selected>Selecciona un Usuario...</option>
                         @foreach ($usuarios as $usuario)
-                            <option value="{{ $usuario->id_usuario }} "
+                            <option value="{{ $usuario->id_usuario }}"
                                 {{ old('id_usuario') == $usuario->id_usuario ? 'selected' : '' }}>
                                 {{ $usuario->nombre }} {{ $usuario->apellidoP }} {{ $usuario->apellidoM }}
                             </option>
@@ -57,9 +57,9 @@
                         @endforeach
                     </select>
                 </div>
+
                 <br>
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <br>
             </form>
         </div>
 
@@ -67,21 +67,12 @@
         <hr>
         <h3>Asignaciones de Usuarios a Áreas y Roles</h3>
 
-<<<<<<< HEAD
-        <!-- Botones para descargar PDF y Excel -->
-        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
-        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
-
-        <table id="asignaciones-table" class="table table-bordered">
-=======
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('usuario_area_rol_registrar') }}">
                 <button type="button" class="btn btn-warning">Nueva Asignación</button>
             </a>
 
             <form action="{{ route('usuario_area_rol_index') }}" method="GET" class="d-flex align-items-center">
-                {{ csrf_field() }}
-                
                 <div class="form-floating me-2">
                     <input type="text" class="form-control" name="buscar" value="{{ old('buscar') }}" id="floatingBuscar" placeholder="Buscar por Usuario, Área o Rol">
                     <label for="floatingBuscar">Buscar</label>
@@ -93,17 +84,19 @@
                 </div>
             
                 <button type="submit" class="btn btn-primary">Buscar</button>
-                <p>   </p>
                 <a href="{{ route('usuario_area_rol_index') }}">
                     <button type="button" class="btn btn-danger">Reiniciar</button>
                 </a>
             </form>
-            
-            
         </div>
 
-        <table class="table table-bordered">
->>>>>>> origin/main
+        <!-- Botones de descarga -->
+        <div class="mb-3">
+            <button id="download-pdf" class="btn btn-danger">Descargar PDF</button>
+            <button id="download-excel" class="btn btn-success">Descargar Excel</button>
+        </div>
+
+        <table class="table table-bordered" id="asignaciones-table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -120,10 +113,10 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $asignacion->id_usuario_area_rol }}</td>
-                        <td>{{ $asignacion->usuario->nombre }} {{ $asignacion->usuario->apellidoP }}
-                            {{ $asignacion->usuario->apellidoM }}</td>
+                        <td>{{ $asignacion->usuario->nombre }} {{ $asignacion->usuario->apellidoP }} {{ $asignacion->usuario->apellidoM }}</td>
                         <td>{{ $asignacion->area->nombre }}</td>
                         <td>{{ $asignacion->rol->nombre }}</td>
+                        <td>{{ \Carbon\Carbon::parse($asignacion->fecha_asignacion)->format('d/m/Y') }}</td>
                         <td>
                             <a href="{{ route('usuario_area_rol_modificar', ['id' => $asignacion->id_usuario_area_rol]) }}">
                                 <button type="button" class="btn btn-warning btn-sm">Editar</button>
