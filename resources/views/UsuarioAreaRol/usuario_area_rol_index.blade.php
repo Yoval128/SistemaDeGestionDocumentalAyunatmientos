@@ -67,6 +67,16 @@
         <hr>
         <h3>Asignaciones de Usuarios a Áreas y Roles</h3>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <!-- Botones para descargar PDF y Excel -->
+        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+
+        <table id="asignaciones-table" class="table table-bordered">
+=======
+>>>>>>> origin/main
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{{ route('usuario_area_rol_registrar') }}">
                 <button type="button" class="btn btn-warning">Nueva Asignación</button>
@@ -90,6 +100,7 @@
             </form>
         </div>
 
+<<<<<<< HEAD
         <!-- Botones de descarga -->
         <div class="mb-3">
             <button id="download-pdf" class="btn btn-danger">Descargar PDF</button>
@@ -97,6 +108,10 @@
         </div>
 
         <table class="table table-bordered" id="asignaciones-table">
+=======
+        <table class="table table-bordered">
+>>>>>>> origin/main
+>>>>>>> origin/main
             <thead>
                 <tr>
                     <th>#</th>

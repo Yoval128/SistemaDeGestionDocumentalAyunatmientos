@@ -12,6 +12,7 @@
                             <a href="{{ route('tramite_alta') }}">
                                 <button type="button" class="btn btn-warning">Nuevo Tramite</button>
                             </a>
+<<<<<<< HEAD
                         </div>
 
                         <!-- Mover los botones al lado izquierdo, debajo del botón "Nuevo Tramite" -->
@@ -65,6 +66,64 @@
                         </form>
 
                         <table class="table table-striped">
+=======
+
+<<<<<<< HEAD
+                        <!-- Botones para generar PDF y Excel -->
+                        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+                        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+
+                        <table id="tramites-table" class="table table-striped">
+=======
+                            <form action="{{ route('tramite_index') }}" method="GET" class="d-flex align-items-center">
+                                {{ csrf_field() }}
+                            
+                                <div class="form-floating me-2">
+                                    <input type="text" class="form-control" name="buscar" value="{{ old('buscar', $buscar) }}"
+                                           id="floatingBuscar" placeholder="ejemplo: Roberto Vinicio"
+                                           aria-describedby="buscarHelp">
+                                    <label for="floatingBuscar">Buscar</label>
+                                    <div id="buscarHelp" class="form-text">
+                                        @if ($errors->first('buscar'))
+                                            <small class="text-danger">{{ $errors->first('buscar') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+                            
+                                <div class="form-floating me-2">
+                                    <input type="date" class="form-control" name="fecha_inicio" value="{{ old('fecha_inicio', $fecha_inicio) }}"
+                                           id="floatingFechaInicio" aria-describedby="fechaInicioHelp">
+                                    <label for="floatingFechaInicio">Fecha de Inicio</label>
+                                    <div id="fechaInicioHelp" class="form-text">
+                                        @if ($errors->first('fecha_inicio'))
+                                            <small class="text-danger">{{ $errors->first('fecha_inicio') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+                            
+                                <div class="form-floating me-2">
+                                    <input type="date" class="form-control" name="fecha_limite" value="{{ old('fecha_limite', $fecha_limite) }}"
+                                           id="floatingFechaLimite" aria-describedby="fechaLimiteHelp">
+                                    <label for="floatingFechaLimite">Fecha Límite</label>
+                                    <div id="fechaLimiteHelp" class="form-text">
+                                        @if ($errors->first('fecha_limite'))
+                                            <small class="text-danger">{{ $errors->first('fecha_limite') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+                            
+                                <button type="submit" class="btn btn-primary me-2">Buscar</button>
+                            
+                                <a href="{{ route('tramite_index') }}">
+                                    <button type="button" class="btn btn-danger">Reiniciar</button>
+                                </a>
+                            </form>
+                            
+                            
+                        </div>
+                        <table class="table table-striped">
+>>>>>>> origin/main
+>>>>>>> origin/main
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -91,8 +150,21 @@
                                             <a href="{{ route('tramite_modificar', ['id' => $tramite->id_tramite]) }}">
                                                 <button type="button" class="btn btn-warning btn-sm">Editar</button>
                                             </a>
+<<<<<<< HEAD
                                             <a href="{{ route('tramite_eliminar', ['id' => $tramite->id_tramite]) }}">
                                                 <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
+=======
+<<<<<<< HEAD
+                                            <a href="{{ route('tramite_eliminar', ['id' => $tramites->id_tramite]) }}">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
+=======
+                                            <a href="{{ route('tramite_eliminar', ['id' => $tramite->id_tramite]) }}">
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('¿Seguro que quieres borrar este registro?')">
+                                                    Borrar
+                                                </button>
+>>>>>>> origin/main
+>>>>>>> origin/main
                                             </a>
                                             <a href="{{ route('tramite_detalle', ['id' => $tramite->id_tramite]) }}">
                                                 <button type="button" class="btn btn-info">Detalle</button>

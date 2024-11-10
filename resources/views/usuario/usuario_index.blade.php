@@ -8,6 +8,19 @@
                     <div class="card-body">
                         <h3 class="card-title">Lista de Usuarios</h3>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                        <a href="{{ route('usuario_alta') }}">
+                            <button type="button" class="btn btn-warning mb-3">Nuevo Registro RAT</button>
+                        </a>
+
+                        <button id="download-pdf" class="btn btn-primary mb-3">Descargar PDF</button>
+                        <button id="download-excel" class="btn btn-success mb-3">Descargar Excel</button>
+
+                        <table id="usuarios-table" class="table table-striped">
+=======
+>>>>>>> origin/main
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <!-- Botón para nuevo usuario -->
                             <a href="{{ route('usuario_alta') }}">
@@ -45,8 +58,13 @@
                             </div>
                         </div>
 
+<<<<<<< HEAD
                         <!-- Tabla de usuarios -->
                         <table id="usuarios-table" class="table table-striped">
+=======
+                        <table class="table table-striped">
+>>>>>>> origin/main
+>>>>>>> origin/main
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -64,7 +82,15 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $usuarios->id_usuario }}</td>
+<<<<<<< HEAD
                                         <td><img src="{{ asset('img/' . $usuarios->foto) }}" style="width: 50px; height:50px;"></td>
+=======
+<<<<<<< HEAD
+                                        <td><img src="{{ 'img/' . $usuarios->foto }}" style="width: 50px; height:50px;"></td>
+=======
+                                        <td><img src="{{ asset('img/' . $usuarios->foto) }}" style="width: 50px; height:50px;"></td>
+>>>>>>> origin/main
+>>>>>>> origin/main
                                         <td>{{ $usuarios->nombre }}</td>
                                         <td>{{ $usuarios->apellidoP . ' ' . $usuarios->apellidoM }}</td>
                                         <td>{{ $usuarios->email }}</td>
@@ -77,7 +103,15 @@
                                                 <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres borrar este registro?')">Borrar</button>
                                             </a>
                                             <a href="{{ route('usuario_detalle', ['id' => $usuarios->id_usuario]) }}">
+<<<<<<< HEAD
                                                 <button type="button" class="btn btn-info btn-sm">Detalle</button>
+=======
+<<<<<<< HEAD
+                                                <button type="button" class="btn btn-info">Detalle</button>
+=======
+                                                <button type="button" class="btn btn-info btn-sm">Detalle</button>
+>>>>>>> origin/main
+>>>>>>> origin/main
                                             </a>
                                         </td>
                                     </tr>
